@@ -1,0 +1,16 @@
+name: Lilify CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    run-backend-ci:
+        uses: ./.github/workflows/backend.yml
+        with:
+            bun-version: "latest"
+            enable-mono: true
+        secrets:
+            MONGO_URI: ${{ secrets.MONGO_URI }}

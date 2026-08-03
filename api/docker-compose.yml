@@ -1,0 +1,46 @@
+services:
+    mongo:
+        image: mongo:latest
+        container_name: lilify-db
+        restart: always
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        volumes:
+            - mongo-data:/data/db
+
+    mongo-express:
+        image: mongo-express:latest
+        container_name: lilify-db-ui
+        restart: always
+        ports:
+            - "8081:8081"
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_PORT: 27017
+            ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+            # Configures the web browser popup login to match your env credentials
+            ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        depends_on:
+            - mongo
+
+    express:
+        build:
+            context: ./
+        container_name: lilify-api
+        restart: always
+        ports:
+            - "${PORT}:3000"
+        environment:
+            PORT: 3000
+            MONGO_URI: ${MONGO_URI}
+            NODE_ENV: ${NODE_ENV}
+        depends_on:
+            - mongo
+
+volumes:
+    mongo-data:
