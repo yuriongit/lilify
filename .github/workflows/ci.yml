@@ -11,6 +11,6 @@ jobs:
         uses: ./.github/workflows/backend.yml
         with:
             bun-version: "latest"
-            enable-mono: true
+            enable-mongo: true
         secrets:
             MONGO_URI: ${{ secrets.MONGO_URI }}
