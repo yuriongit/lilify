@@ -36,9 +36,11 @@ jobs:
                   bun-version: ${{ inputs.bun-version }}
 
             - name: Install Dependencies
+              working-directory: ./api
               run: bun install --frozen-lockfile
 
             - name: TypeScript Checks
+              working-directory: ./api
               run: bun run tsc --noEmit
 
             # TODO:
