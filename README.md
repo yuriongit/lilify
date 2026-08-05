@@ -14,7 +14,7 @@ A full-stack URL shortening application that generates unique short links and re
 
 ### Frontend
 
-- SvelteKit
+- SvelteKit -> React (planned)
 - Vite
 - TypeScript
 - TailwindCSS
