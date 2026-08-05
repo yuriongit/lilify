@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-export const db_client = await mongoose.connect(String(process.env.MONGO_URI));
+// Environment vars indexes
+const MONGO_URI = "MONGO_URI"
+
+export const db_client = await mongoose.connect(String(process.env[MONGO_URI]));
 
 interface IUrl {
     short_id: string
