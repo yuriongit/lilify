@@ -7,9 +7,13 @@
     let errorMsg = $state("");
     let copied = $state(false);
 
+    // Environment vars indexes
+    const VITE_API_BASE_URL = "VITE_API_BASE_URL"
+    const VITE_SHORTEN_URL_ROUTE = "VITE_API_BASE_URL"
+    
     // Replace with your backend endpoint
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-    const SHORTEN_URL_ROUTE = import.meta.env.VITE_SHORTEN_URL_ROUTE;
+    const API_BASE_URL = import.meta.env[VITE_API_BASE_URL];
+    const SHORTEN_URL_ROUTE = import.meta.env[VITE_SHORTEN_URL_ROUTE];
 
     // Zod Schema: trims, auto-prepends protocol, and validates URL structure
     const urlSchema = z4.url("Please enter a URL").trim();

@@ -31,7 +31,6 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
-    "erasableSyntaxOnly": true,
     
     // Temporary flag
     "noErrorTruncation": false // for debugging, if usedonce done revert to false

@@ -2,6 +2,9 @@ import crypto from "node:crypto";
 import { env } from "bun";
 import { UrlsModel } from "@libs/clients/storage/mongodb.client";
 
+// Environment vars indexes
+const FRONTEND_URL = "FRONTEND_URL";
+
 export type Result<T> = [data: T, err: null] | [data: null, err: Error];
 
 export const UrlService = {
@@ -61,10 +64,10 @@ export const UrlService = {
             await UrlsModel.create({
                 short_id: id, // Store only the 6-character key in the DB
                 original_url: ogUrl,
-                created_at: Date.now()
+                created_at: Date.now(),
             });
 
-            const baseUrl = env.FRONTEND_URL ?? "http://localhost:3000";
+            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:3000";
             const fullShortUrl = `${baseUrl}/${id}`;
 
             return [fullShortUrl, null];
