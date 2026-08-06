@@ -21,4 +21,4 @@ jobs:
         uses: ./.github/workflows/ci-frontend.yml
     build-api:
         needs: [frontend, api]
-        uses: ./github/workflows/ci-build-api.yml
+        uses: ./.github/workflows/ci-build-api.yml
