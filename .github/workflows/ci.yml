@@ -11,14 +11,14 @@ jobs:
         uses: ./.github/workflows/ci-lint.yml
     api:
         needs:
-            lint
+            [lint]
         uses: ./.github/workflows/ci-api.yml
         secrets:
             MONGO_URI: ${{ secrets.MONGO_URI }}
     frontend:
         needs:
-            lint
-        uses: ./github/workflows/ci-frontend.yml
+            [lint]
+        uses: ./.github/workflows/ci-frontend.yml
     build-api:
         needs: [frontend, api]
         uses: ./github/workflows/ci-build-api.yml
