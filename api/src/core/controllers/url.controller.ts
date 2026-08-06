@@ -1,7 +1,7 @@
-import { HttpError } from "@/middleware/errors/errors"
 import { UrlService } from "@core/services/url.service"
-import type { ShortUrlReq } from "@/schemas/url.schema"
 import type { NextFunction, Request, Response } from "express"
+import { HttpError } from "@/middleware/errors/errors"
+import type { ShortUrlReq } from "@/schemas/url.schema"
 
 export const UrlController = {
     async shortenUrl(req: Request, res: Response, next: NextFunction) {

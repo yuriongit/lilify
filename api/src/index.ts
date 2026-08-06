@@ -1,6 +1,6 @@
+import { UrlController } from "@core/controllers/url.controller"
 import express from "express"
 import { errorMiddleware } from "@/middleware/errors/error.middleware"
-import { UrlController } from "@core/controllers/url.controller"
 import { validateBody } from "@/middleware/validation/validator"
 import { shortUrlReqSchema } from "@/schemas/url.schema"
 
