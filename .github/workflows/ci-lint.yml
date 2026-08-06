@@ -1,0 +1,19 @@
+name: Lint
+on:
+    workflow_call:
+      
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout Code
+            uses: actions/checkout@v5
+          - name: Setup Bun Environment
+            uses: ./.github/actions/setup-bun
+          - name: Install Dependencies
+            uses: ./.github/actions/install-deps
+            with:
+                working-directory: ./
+          - name: Lint Check
+            run: bunx biome ci .
+ 

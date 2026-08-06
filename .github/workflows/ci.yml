@@ -7,10 +7,18 @@ on:
         branches: [main]
 
 jobs:
-    run-backend-ci:
-        uses: ./.github/workflows/backend.yml
-        with:
-            bun-version: "latest"
-            enable-mongo: true
+    lint:
+        uses: ./.github/workflows/ci-lint.yml
+    api:
+        needs:
+            [lint]
+        uses: ./.github/workflows/ci-api.yml
         secrets:
             MONGO_URI: ${{ secrets.MONGO_URI }}
+    frontend:
+        needs:
+            [lint, api]
+        uses: ./.github/workflows/ci-frontend.yml
+    build-api:
+        needs: [frontend, api]
+        uses: ./.github/workflows/ci-build-api.yml

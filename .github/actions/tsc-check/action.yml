@@ -1,0 +1,14 @@
+name: TypeScript Check
+inputs:
+    working-directory:
+        required: true
+        type: string
+        
+runs:
+    using: composite
+    steps:
+        - name: TypeScript Check
+          working-directory: ${{ inputs.working-directory }}
+          shell: bash
+          run: bunx tsc --noEmit
+ 
