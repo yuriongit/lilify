@@ -1,17 +1,17 @@
-import { HttpError } from "@/middleware/errors/errors";
-import { UrlService } from "@core/services/url.service";
-import type { ShortUrlReq } from "@/schemas/url.schema";
-import type { NextFunction, Request, Response } from "express";
+import { HttpError } from "@/middleware/errors/errors"
+import { UrlService } from "@core/services/url.service"
+import type { ShortUrlReq } from "@/schemas/url.schema"
+import type { NextFunction, Request, Response } from "express"
 
 export const UrlController = {
     async shortenUrl(req: Request, res: Response, next: NextFunction) {
-        const { original_url }: ShortUrlReq  = req.body;
+        const { original_url }: ShortUrlReq = req.body
 
-        const [shortUrl, err] = await UrlService.assignUrl(original_url);
+        const [shortUrl, err] = await UrlService.assignUrl(original_url)
         if (err) {
-            next(new HttpError(500, err.message));
+            next(new HttpError(500, err.message))
         }
 
-        return res.status(200).json({ short_url: shortUrl });
+        return res.status(200).json({ short_url: shortUrl })
     },
-};
+}

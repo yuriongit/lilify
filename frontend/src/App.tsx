@@ -1,6 +1,5 @@
-import { useState, type SubmitEvent } from "react";
-import { z } from "zod/v4";
-
+import { useState, type SubmitEvent } from "react"
+import { z } from "zod/v4"
 
 const VITE_API_BASE_URL = "VITE_API_BASE_URL"
 const VITE_SHORTEN_URL_ENDPOINT = "VITE_SHORTEN_URL_ENDPOINT"
@@ -10,75 +9,80 @@ const SHORTEN_URL_ENDPOINT = String(import.meta.env[VITE_SHORTEN_URL_ENDPOINT])
 if (!API_BASE_URL || !SHORTEN_URL_ENDPOINT) {
     throw new Error(
         "Missing required environment variables: VITE_API_BASE_URL and/or VITE_SHORTEN_URL_ENDPOINT",
-    );
+    )
 }
 
 // Zod schema: trims whitespace and validates URL structure
-const urlSchema = z.url("Please enter a valid URL").trim();
+const urlSchema = z.url("Please enter a valid URL").trim()
 
 interface ShortenUrlResponse {
-    short_url: string;
+    short_url: string
 }
 
 export const App = () => {
-    const [url, setUrl] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [shortenedUrl, setShortenedUrl] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
-    const [copied, setCopied] = useState(false);
+    const [url, setUrl] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
+    const [shortenedUrl, setShortenedUrl] = useState("")
+    const [errorMsg, setErrorMsg] = useState("")
+    const [copied, setCopied] = useState(false)
 
     async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
-        e.preventDefault();
+        e.preventDefault()
 
-        const result = urlSchema.safeParse(url);
+        const result = urlSchema.safeParse(url)
 
         if (!result.success) {
-            setErrorMsg(result.error.issues[0]?.message ?? "Invalid URL");
-            return;
+            setErrorMsg(result.error.issues[0]?.message ?? "Invalid URL")
+            return
         }
 
-        const formattedUrl = result.data;
+        const formattedUrl = result.data
 
-        setErrorMsg("");
-        setIsLoading(true);
+        setErrorMsg("")
+        setIsLoading(true)
 
         try {
-            const response = await fetch(`http://${API_BASE_URL}/${SHORTEN_URL_ENDPOINT}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ original_url: formattedUrl }),
-            });
+            const response = await fetch(
+                `http://${API_BASE_URL}/${SHORTEN_URL_ENDPOINT}`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ original_url: formattedUrl }),
+                },
+            )
 
             if (!response.ok) {
-                throw new Error("Failed to shorten URL");
+                throw new Error("Failed to shorten URL")
             }
 
-            const data: ShortenUrlResponse = await response.json();
-            setShortenedUrl(data.short_url);
+            const data: ShortenUrlResponse = await response.json()
+            setShortenedUrl(data.short_url)
         } catch (err) {
-            setErrorMsg(err instanceof Error ? err.message : "An error occurred");
+            setErrorMsg(
+                err instanceof Error ? err.message : "An error occurred",
+            )
             console.error(err)
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
     }
 
     async function copyToClipboard() {
-        if (!shortenedUrl) return;
+        if (!shortenedUrl) return
         try {
-            await navigator.clipboard.writeText(shortenedUrl);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+            await navigator.clipboard.writeText(shortenedUrl)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
         } catch {
-            setErrorMsg("Failed to copy to clipboard");
+            setErrorMsg("Failed to copy to clipboard")
         }
     }
 
     function handleReset() {
-        setUrl("");
-        setShortenedUrl("");
-        setErrorMsg("");
-        setCopied(false);
+        setUrl("")
+        setShortenedUrl("")
+        setErrorMsg("")
+        setCopied(false)
     }
 
     return (
@@ -114,7 +118,11 @@ export const App = () => {
                 <div className="bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/80 rounded-2xl p-4 sm:p-6 shadow-2xl shadow-black/40">
                     {!shortenedUrl ? (
                         // Form View
-                        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                        <form
+                            onSubmit={handleSubmit}
+                            className="space-y-4"
+                            noValidate
+                        >
                             <div>
                                 <label
                                     htmlFor="url-input"
@@ -132,7 +140,9 @@ export const App = () => {
                                     placeholder="https://example.com/very-long-link"
                                     disabled={isLoading}
                                     aria-invalid={Boolean(errorMsg)}
-                                    aria-describedby={errorMsg ? "url-input-error" : undefined}
+                                    aria-describedby={
+                                        errorMsg ? "url-input-error" : undefined
+                                    }
                                     className="w-full px-3 py-2 bg-zinc-950/80 border border-zinc-800 rounded-lg text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-400/50 focus:border-zinc-400/50 transition-all shadow-inner disabled:opacity-50"
                                 />
                                 {errorMsg && (
@@ -202,7 +212,9 @@ export const App = () => {
                                     Your Shortened Link
                                 </span>
                                 <div className="flex items-center justify-between p-3 bg-zinc-950/80 border border-zinc-800/90 rounded-lg text-sm font-mono text-zinc-200 min-w-0">
-                                    <span className="truncate select-all">{shortenedUrl}</span>
+                                    <span className="truncate select-all">
+                                        {shortenedUrl}
+                                    </span>
                                 </div>
                             </div>
 
@@ -278,5 +290,5 @@ export const App = () => {
                 </div>
             </div>
         </main>
-    );
-};
+    )
+}
