@@ -6,8 +6,8 @@
             "@core/*": ["./src/core/*"],
             "@tests/*": ["./src/tests/*"],
             "@utils/*": ["./src/utils/*"],
-            "@libs/*": ["./src/libs/*"],
+            "@libs/*": ["./src/libs/*"]
         },
-        "types": ["bun"],
+        "types": ["bun"]
     }
 }

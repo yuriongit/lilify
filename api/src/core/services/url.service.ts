@@ -1,11 +1,11 @@
-import crypto from "node:crypto";
-import { env } from "bun";
-import { UrlsModel } from "@libs/clients/storage/mongodb.client";
+import crypto from "node:crypto"
+import { env } from "bun"
+import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 
 // Environment vars indexes
-const FRONTEND_URL = "FRONTEND_URL";
+const FRONTEND_URL = "FRONTEND_URL"
 
-export type Result<T> = [data: T, err: null] | [data: null, err: Error];
+export type Result<T> = [data: T, err: null] | [data: null, err: Error]
 
 export const UrlService = {
     /**
@@ -14,7 +14,7 @@ export const UrlService = {
      * Space: 64^6 = ~68.7 billion combinations.
      */
     generateId(): string {
-        return crypto.randomBytes(5).toString("base64url").slice(0, 6);
+        return crypto.randomBytes(5).toString("base64url").slice(0, 6)
     },
 
     /**
@@ -22,10 +22,10 @@ export const UrlService = {
      */
     async idExists(id: string): Promise<Result<boolean>> {
         try {
-            const existing = await UrlsModel.exists({ short_id: id });
-            return [Boolean(existing), null];
+            const existing = await UrlsModel.exists({ short_id: id })
+            return [Boolean(existing), null]
         } catch (err) {
-            return [null, new Error(`idExists failed: ${err}`)];
+            return [null, new Error(`idExists failed: ${err}`)]
         }
     },
 
@@ -35,18 +35,23 @@ export const UrlService = {
      */
     async generateUniqueId(maxRetries = 5): Promise<Result<string>> {
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
-            const id = UrlService.generateId();
+            const id = UrlService.generateId()
 
-            const [exists, err] = await UrlService.idExists(id);
-            if (err) return [null, err];
+            const [exists, err] = await UrlService.idExists(id)
+            if (err) return [null, err]
 
             // Unique ID found!
             if (!exists) {
-                return [id, null];
+                return [id, null]
             }
         }
 
-        return [null, new Error(`Failed to generate a unique ID after ${maxRetries} attempts`)];
+        return [
+            null,
+            new Error(
+                `Failed to generate a unique ID after ${maxRetries} attempts`,
+            ),
+        ]
     },
 
     /**
@@ -54,9 +59,9 @@ export const UrlService = {
      */
     async assignUrl(ogUrl: string): Promise<Result<string>> {
         // 1. Generate unique ID
-        const [id, idErr] = await UrlService.generateUniqueId();
+        const [id, idErr] = await UrlService.generateUniqueId()
         if (idErr) {
-            return [null, new Error(`assignUrl: ${idErr.message}`)];
+            return [null, new Error(`assignUrl: ${idErr.message}`)]
         }
 
         // 2. Persist to MongoDB
@@ -65,14 +70,17 @@ export const UrlService = {
                 short_id: id, // Store only the 6-character key in the DB
                 original_url: ogUrl,
                 created_at: Date.now(),
-            });
+            })
 
-            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:3000";
-            const fullShortUrl = `${baseUrl}/${id}`;
+            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:3000"
+            const fullShortUrl = `${baseUrl}/${id}`
 
-            return [fullShortUrl, null];
+            return [fullShortUrl, null]
         } catch (err) {
-            return [null, new Error(`assignUrl: database insert failed - ${err}`)];
+            return [
+                null,
+                new Error(`assignUrl: database insert failed - ${err}`),
+            ]
         }
     },
-};
+}

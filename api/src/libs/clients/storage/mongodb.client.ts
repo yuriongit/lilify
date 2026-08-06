@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+import mongoose from "mongoose"
+const { Schema, model } = mongoose
 
 // Environment vars indexes
 const MONGO_URI = "MONGO_URI"
 
-export const db_client = await mongoose.connect(String(process.env[MONGO_URI]));
+export const db_client = await mongoose.connect(String(process.env[MONGO_URI]))
 
 interface IUrl {
     short_id: string
@@ -17,7 +17,7 @@ const url = new Schema<IUrl>({
         type: String,
         required: true,
         unique: true,
-        index: true
+        index: true,
     },
     original_url: {
         type: String,
@@ -26,7 +26,7 @@ const url = new Schema<IUrl>({
     created_at: {
         type: Date,
         required: true,
-    }
-});
+    },
+})
 
-export const UrlsModel = model<IUrl>("Urls", url);
+export const UrlsModel = model<IUrl>("Urls", url)
