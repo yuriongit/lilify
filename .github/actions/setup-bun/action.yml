@@ -1,5 +1,4 @@
 name: Setup Bun Environment
-inputs:
 
 runs:
     using: composite
