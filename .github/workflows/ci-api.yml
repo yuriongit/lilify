@@ -1,0 +1,36 @@
+name: API CI
+
+on:
+    workflow_call:
+        secrets:
+            MONGO_URI:
+                required: true
+
+jobs:
+    test-and-build:
+        runs-on: ubuntu-latest
+
+        services:
+            mongo:
+                image: mongo:latest
+                ports:
+                    - 27017:27017
+
+        steps:
+            - name: Setup Bun Environment
+              uses: ./.github/actions/setup-bun
+
+            - name: Install Dependencies
+              uses: ./.github/actions/install-deps
+              with:
+                working-directory: ./api
+
+            - name: TypeScript Check
+              uses: ./.github/actions/typescript-check
+              with:
+                working-directory: ./api
+
+            # - name: Unit-Tests
+            #   env:
+            #       MONGO_URI: mongodb://localhost:27017/lilify_test
+            #   run: bun test
