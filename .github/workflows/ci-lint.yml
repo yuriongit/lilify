@@ -6,6 +6,8 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
+          - name: Checkout Code
+            uses: actions/checkout@v5
           - name: Setup Bun Environment
             uses: ./.github/actions/setup-bun
           - name: Install Dependencies

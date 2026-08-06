@@ -4,8 +4,6 @@ inputs:
 runs:
     using: composite
     steps:
-        - name: Checkout Code
-          uses: actions/checkout@v5
         - name: Setup Environment
           uses: oven-sh/setup-bun@v2
           with:
