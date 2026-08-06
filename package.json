@@ -13,6 +13,8 @@
     "scripts": {
         "lint": "bunx --bun @biomejs/biome lint",
         "lint-write": "bunx --bun @biomejs/biome lint --write",
-        "format": "bunx --bun @biomejs/biome format --write"
+        "format": "bunx --bun @biomejs/biome format --write",
+        "check": "bunx --bun @biomejs/biome check",
+        "check:write": "bunx --bun @biomejs/biome check --write"
     }
 }
