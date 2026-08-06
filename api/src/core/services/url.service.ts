@@ -1,6 +1,6 @@
 import crypto from "node:crypto"
-import { env } from "bun"
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
+import { env } from "bun"
 
 // Environment vars indexes
 const FRONTEND_URL = "FRONTEND_URL"
