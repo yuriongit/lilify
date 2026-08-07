@@ -8,7 +8,7 @@
     - [x] ~~Include corresponding Biome scripts~~
 - [x] ~~Add a tsconfig-base and refactor sub tsconfig files to follow the base~~
     - [x] ~~Update bracket indexing to satisfy stricter tsconfig-base~~
-    
+
 #### Remaining
 
 - [ ] Establish shared TypeScript types
@@ -45,7 +45,7 @@
 - [ ] Reorganize API directory structure
 - [ ] Review controller/service separation
     - [ ] Additionally, separate data from service layer into repo layer
-- [ ] Review error handling consistency and improve if needed 
+- [ ] Review error handling consistency and improve if needed
 
 ## Frontend
 
@@ -90,35 +90,46 @@
 #### Completed
 
 - [x] ~~Add initial CI workflow~~
+- [x] Actions
+    - [x] ~~Composite Action: Setup Bun~~
+    - [x] ~~Composite Action: Install Deps~~
+    - [x] ~~Composite Action: TypeScript Check~~
+
+- [ ] CI Workflow
+    - [x] Workflow: Build API
+        - [x] Job: 'build-api'
+            - [x] ~~Step: Build Docker image~~
 
 #### Remaining
 
-- [ ] Add frontend CI workflow
-    - [ ] Job: 'test-and-build'
-        - [ ] Step: Checkout code
-        - [ ] Step: Setup environment
-        - [ ] Step: Install dependencies
-        - [ ] Step: Run linting
-        - [ ] Step: Run tests
-        - [ ] Step: Build application
-- [ ] Add backend CI workflow
-    - [ ] Job: 'test-and-build'
-        - [x] ~~Service: MongoDB~~
-        - [x] ~~Step: Checkout Code~~
-        - [x] ~~Step: Setup environment~~
-        - [x] ~~Step: Install dependencies~~
-        - [x] ~~Step: TypeScript checks~~
-        - [x] ~~Step: Build Docker image~~
-        - [ ] Step: Run linting (planned)
-        - [ ] Step: Run tests (planned)
+- [ ] Complete CI Workflow
+    - [x] ~~Job: Run global linting~~
+    - [ ] Remove 'frontend' from 'build-api/needs' field
+    - [ ] Workflow: API
+        - [ ] Job: 'test-and-verify'
+            - [x] ~~Service: MongoDB~~
+            - [x] ~~Step: Checkout code~~
+            - [x] ~~Step: Setup environment~~
+            - [x] ~~Step: Install dependencies~~
+            - [x] ~~Step: TypeScript checks~~
+            - [ ] Step: Run tests
+    - [ ] Workflow: Frontend
+        - [ ] Job: 'test-and-verify'
+            - [x] ~~Step: Checkout code~~
+            - [x] ~~Step: Setup environment~~
+            - [x] ~~Step: Install dependencies~~
+            - [ ] Step: TypeScript checks
+            - [ ] Step: Run tests
 
 ## Chores
 
 #### Completed
+
 ...
 
 #### Remaining
-- [ ] Implement lint fixes to satisfy Biome ruleset
+
+- [x] Implement lint fixes to satisfy Biome ruleset
 - [ ] Set up Bun test runner
 - [ ] Create test coverage requirements
 - [ ] Add environment variable documentation
