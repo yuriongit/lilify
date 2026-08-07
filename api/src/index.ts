@@ -3,8 +3,10 @@ import express from "express"
 import { errorMiddleware } from "@/middleware/errors/error.middleware"
 import { validateBody } from "@/middleware/validation/validator"
 import { shortUrlReqSchema } from "@/schemas/url.schema"
+import { corsConfig } from "../app/config/cors/cors.config"
 
 const app = express()
+app.use(corsConfig)
 app.use(express.json())
 
 // Environment vars indexes
