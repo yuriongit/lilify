@@ -3,7 +3,7 @@ on:
     workflow_call:
       
 jobs:
-    lint:
+    test-and-verify:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout Code
