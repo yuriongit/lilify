@@ -43,7 +43,7 @@ export const App = () => {
 
         try {
             const response = await fetch(
-                `http://${API_BASE_URL}/${SHORTEN_URL_ENDPOINT}`,
+                `${API_BASE_URL}/${SHORTEN_URL_ENDPOINT}`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

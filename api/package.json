@@ -5,12 +5,14 @@
     "private": true,
     "devDependencies": {
         "@types/bun": "latest",
+        "@types/cors": "^2.8.19",
         "@types/express": "^5.0.6"
     },
     "peerDependencies": {
         "typescript": "7.0.2"
     },
     "dependencies": {
+        "cors": "^2.8.6",
         "express": "^5.2.1",
         "mongodb": "^7.5.0",
         "mongoose": "^9.9.1",

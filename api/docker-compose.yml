@@ -39,6 +39,7 @@ services:
             PORT: 3000
             MONGO_URI: ${MONGO_URI}
             NODE_ENV: ${NODE_ENV}
+            FRONTEND_BASE_URL: ${FRONTEND_BASE_URL}
         depends_on:
             - mongo
 
