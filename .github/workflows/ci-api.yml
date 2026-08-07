@@ -21,14 +21,12 @@ jobs:
               uses: actions/checkout@v5
             - name: Setup Bun Environment
               uses: ./.github/actions/setup-bun
-
             - name: Install Dependencies
               uses: ./.github/actions/install-deps
               with:
                 working-directory: ./api
-
             - name: TypeScript Check
-              uses: ./.github/actions/typescript-check
+              uses: ./.github/actions/tsc-check
               with:
                 working-directory: ./api
 

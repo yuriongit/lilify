@@ -17,7 +17,7 @@ jobs:
             MONGO_URI: ${{ secrets.MONGO_URI }}
     frontend:
         needs:
-            [lint]
+            [lint, api]
         uses: ./.github/workflows/ci-frontend.yml
     build-api:
         needs: [frontend, api]
