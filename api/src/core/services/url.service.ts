@@ -1,6 +1,6 @@
-import crypto from "node:crypto"
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { env } from "bun"
+import { generateId } from "@/utils/id"
 
 // Environment vars indexes
 const FRONTEND_URL = "FRONTEND_URL"
@@ -8,15 +8,6 @@ const FRONTEND_URL = "FRONTEND_URL"
 export type Result<T> = [data: T, err: null] | [data: null, err: Error]
 
 export const UrlService = {
-    /**
-     * Generates a random 6-character URL-safe string.
-
-     * Space: 64^6 = ~68.7 billion combinations.
-     */
-    generateId(): string {
-        return crypto.randomBytes(5).toString("base64url").slice(0, 6)
-    },
-
     /**
      * Checks if a given ID already exists in the database.
      */
@@ -35,7 +26,7 @@ export const UrlService = {
      */
     async generateUniqueId(maxRetries = 5): Promise<Result<string>> {
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
-            const id = UrlService.generateId()
+            const id = generateId()
 
             const [exists, err] = await UrlService.idExists(id)
             if (err) return [null, err]
