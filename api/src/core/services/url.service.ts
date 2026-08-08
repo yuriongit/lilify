@@ -1,6 +1,6 @@
-import { generateId } from "@/utils/id"
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { env } from "bun"
+import { generateId } from "@/utils/id"
 
 // Environment vars indexes
 const FRONTEND_URL = "FRONTEND_URL"
