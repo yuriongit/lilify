@@ -63,7 +63,7 @@ export const UrlService = {
                 created_at: Date.now(),
             })
 
-            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:3000"
+            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:5173"
             const fullShortUrl = `${baseUrl}/${id}`
 
             return [fullShortUrl, null]
