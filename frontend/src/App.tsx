@@ -26,6 +26,42 @@ export const App = () => {
     const [errorMsg, setErrorMsg] = useState("")
     const [copied, setCopied] = useState(false)
 
+    const currLocation = window.location.pathname
+    console.log(currLocation)
+
+    const [invalidRedirectUrlMsg, setInvalidRedirectUrlMsg] = useState("")
+    const [fetchRedirectUrlError, setFetchRedirectUrlError] = useState(false)
+
+    useEffect(() => {
+        async function redirectShortUrl() {
+            if (currLocation.length === 7) {
+                try {
+                    const alias: string = currLocation.split("/").join("")
+
+                    const response = await fetch(
+                        "http://localhost:3000/api/lilify/v1/redirect-url",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ alias: alias }),
+                        },
+                    )
+                    if (response.ok) {
+                        const data = await response.json()
+                        window.location.href = data.redirectUrl
+                    } else {
+                        setInvalidRedirectUrlMsg("Invalid URL")
+                    }
+                } catch (error) {
+                    setFetchRedirectUrlError(true)
+                    console.error(`Failed to fetch redirect URL: ${error}`)
+                }
+            }
+        }
+
+        redirectShortUrl()
+    }, [currLocation])
+
     async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault()
 
