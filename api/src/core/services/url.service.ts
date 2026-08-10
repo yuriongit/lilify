@@ -1,6 +1,7 @@
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { env } from "bun"
 import { generateId } from "@/utils/id"
+import { HttpError } from "@/middleware/errors/errors"
 
 // Environment vars indexes
 const FRONTEND_URL = "FRONTEND_URL"
@@ -72,6 +73,30 @@ export const UrlService = {
                 null,
                 new Error(`assignUrl: database insert failed - ${err}`),
             ]
+        }
+    },
+
+    /**
+     * Resolves a shortened URL alias to its original URL.
+     */   
+    async resolveUrl(alias: string): Promise<Result<string>> {
+        try {
+            const urlInfo = await UrlsModel.findOne(
+                { short_id: alias },
+                { original_url: 1 },
+            )
+
+            if (urlInfo !== null) {
+                return [urlInfo.original_url, null]
+            } else {
+                return [
+                    null,
+                    new HttpError(404, "No URL exists under that alias"),
+                ]
+            }
+        } catch (error) {
+            console.error(error)
+            return [null, new HttpError(400, `${error}`)]
         }
     },
 }
