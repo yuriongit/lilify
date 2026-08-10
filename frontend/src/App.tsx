@@ -49,7 +49,7 @@ export const App = () => {
                     )
                     if (response.ok) {
                         const data = await response.json()
-                        window.location.href = data.redirectUrl
+                        window.location.href = data.redirect_url
                     } else {
                         setInvalidRedirectUrlMsg("Invalid URL")
                     }
