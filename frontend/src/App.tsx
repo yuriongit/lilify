@@ -28,7 +28,6 @@ export const App = () => {
     const [copied, setCopied] = useState(false)
 
     const currLocation = window.location.pathname
-    console.log(currLocation)
 
     const [invalidRedirectUrlMsg, setInvalidRedirectUrlMsg] = useState("")
     const [fetchRedirectUrlError, setFetchRedirectUrlError] = useState(false)
@@ -136,7 +135,7 @@ export const App = () => {
                                 {/*Somewhat of jokey error message saying either the request failed to*/}
                                 {fetchRedirectUrlError
                                     ? "Redirect URL request failed: 500"
-                                    : "Womp, womp. A URL doesn't exist under this alias :("}
+                                    : "Womp, womp. A URL doesn't exist under this alias..."}
                             </p>
                         </div>
                         <button
