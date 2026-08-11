@@ -13,13 +13,13 @@ app.use(express.json())
 const PORT = "PORT"
 
 app.post(
-    "/api/lilify/v1",
+    "/api/lilify/v1/urls",
     validateBody(shortUrlReqSchema),
     UrlController.shortenUrl,
 )
 
 app.get(
-    "/api/lilify/v1/redirect-url",
+    "/api/lilify/v1/urls",
     validateQuery(resolveAliasSchema),
     UrlController.getOriginalUrl,
 )
