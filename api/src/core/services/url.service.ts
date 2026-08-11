@@ -1,7 +1,7 @@
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { env } from "bun"
-import { generateId } from "@/utils/id"
 import { HttpError } from "@/middleware/errors/errors"
+import { generateId } from "@/utils/id"
 
 // Environment vars indexes
 const FRONTEND_URL = "FRONTEND_URL"
@@ -78,7 +78,7 @@ export const UrlService = {
 
     /**
      * Resolves a shortened URL alias to its original URL.
-     */   
+     */
     async resolveUrl(alias: string): Promise<Result<string>> {
         try {
             const urlInfo = await UrlsModel.findOne(
