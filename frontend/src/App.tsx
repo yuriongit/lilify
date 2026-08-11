@@ -3,13 +3,12 @@ import { type SubmitEvent, useEffect, useState } from "react"
 import { z } from "zod/v4"
 
 const VITE_API_BASE_URL = "VITE_API_BASE_URL"
-const VITE_SHORTEN_URL_ENDPOINT = "VITE_SHORTEN_URL_ENDPOINT"
 const API_BASE_URL = String(import.meta.env[VITE_API_BASE_URL])
-const SHORTEN_URL_ENDPOINT = String(import.meta.env[VITE_SHORTEN_URL_ENDPOINT])
+const BASE_ENDPOINT = "api/lilify/v1/urls"
 
-if (!API_BASE_URL || !SHORTEN_URL_ENDPOINT) {
+if (!API_BASE_URL) {
     throw new Error(
-        "Missing required environment variables: VITE_API_BASE_URL and/or VITE_SHORTEN_URL_ENDPOINT",
+        "Missing required environment variable: VITE_API_BASE_URL",
     )
 }
 
@@ -39,7 +38,7 @@ export const App = () => {
                     const alias: string = currLocation.split("/").join("")
 
                     const response = await fetch(
-                        `${import.meta.env[VITE_API_BASE_URL]}/api/lilify/v1/redirect-url?alias=${alias}`,
+                        `${import.meta.env[VITE_API_BASE_URL]}/${BASE_ENDPOINT}?alias=${alias}`,
                     )
                     if (response.ok) {
                         const data = await response.json()
@@ -74,7 +73,7 @@ export const App = () => {
 
         try {
             const response = await fetch(
-                `${API_BASE_URL}/${SHORTEN_URL_ENDPOINT}`,
+                `${API_BASE_URL}/${BASE_ENDPOINT}`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
