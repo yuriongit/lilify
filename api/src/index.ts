@@ -1,8 +1,8 @@
 import { UrlController } from "@core/controllers/url.controller"
 import express from "express"
 import { errorMiddleware } from "@/middleware/errors/error.middleware"
-import { validateBody } from "@/middleware/validation/validator"
-import { shortUrlReqSchema } from "@/schemas/url.schema"
+import { validateBody, validateQuery } from "@/middleware/validation/validator"
+import { resolveAliasSchema, shortUrlReqSchema } from "@/schemas/url.schema"
 import { corsConfig } from "../app/config/cors/cors.config"
 
 const app = express()
@@ -13,9 +13,15 @@ app.use(express.json())
 const PORT = "PORT"
 
 app.post(
-    "/api/lilify/v1",
+    "/api/lilify/v1/urls",
     validateBody(shortUrlReqSchema),
     UrlController.shortenUrl,
+)
+
+app.get(
+    "/api/lilify/v1/urls",
+    validateQuery(resolveAliasSchema),
+    UrlController.getOriginalUrl,
 )
 
 app.listen(Number(process.env[PORT]), () =>
