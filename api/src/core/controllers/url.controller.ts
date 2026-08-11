@@ -4,7 +4,7 @@ import { HttpError } from "@/middleware/errors/errors"
 import type {
     ResolveAliasRequest,
     ResolveAliasResponse,
-    ShortUrlReq,
+    ShortenUrlRequest,
 } from "@/schemas/url.schema"
 
 export const UrlController = {
@@ -23,15 +23,20 @@ export const UrlController = {
      * Retrieves and returns the original URL mapped to its alias.
      */
     async getOriginalUrl(
-        req: Request<unknown, ResolveAliasResponse, ResolveAliasRequest>,
+        req: Request<
+            unknown,
+            ResolveAliasResponse,
+            unknown,
+            ResolveAliasRequest
+        >,
         res: Response,
         next: NextFunction,
     ) {
-        const { alias } = req.body
+        const { alias } = req.query
 
         const [original_url, err] = await UrlService.resolveUrl(alias)
         if (err) {
-            next(new HttpError(500, err.message))
+            return next(new HttpError(500, err.message))
         }
 
         return res.status(200).json({ original_url: original_url })

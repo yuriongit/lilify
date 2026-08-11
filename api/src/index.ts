@@ -1,7 +1,7 @@
 import { UrlController } from "@core/controllers/url.controller"
 import express from "express"
 import { errorMiddleware } from "@/middleware/errors/error.middleware"
-import { validateBody } from "@/middleware/validation/validator"
+import { validateBody, validateQuery } from "@/middleware/validation/validator"
 import { resolveAliasSchema, shortUrlReqSchema } from "@/schemas/url.schema"
 import { corsConfig } from "../app/config/cors/cors.config"
 
@@ -18,9 +18,9 @@ app.post(
     UrlController.shortenUrl,
 )
 
-app.post(
+app.get(
     "/api/lilify/v1/redirect-url",
-    validateBody(resolveAliasSchema),
+    validateQuery(resolveAliasSchema),
     UrlController.getOriginalUrl,
 )
 
