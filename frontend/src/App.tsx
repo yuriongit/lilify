@@ -7,9 +7,7 @@ const API_BASE_URL = String(import.meta.env[VITE_API_BASE_URL])
 const BASE_ENDPOINT = "api/lilify/v1/urls"
 
 if (!API_BASE_URL) {
-    throw new Error(
-        "Missing required environment variable: VITE_API_BASE_URL",
-    )
+    throw new Error("Missing required environment variable: VITE_API_BASE_URL")
 }
 
 // Zod schema: trims whitespace and validates URL structure
@@ -72,14 +70,11 @@ export const App = () => {
         setIsLoading(true)
 
         try {
-            const response = await fetch(
-                `${API_BASE_URL}/${BASE_ENDPOINT}`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ original_url: formattedUrl }),
-                },
-            )
+            const response = await fetch(`${API_BASE_URL}/${BASE_ENDPOINT}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ original_url: formattedUrl }),
+            })
 
             if (!response.ok) {
                 throw new Error("Failed to shorten URL")
