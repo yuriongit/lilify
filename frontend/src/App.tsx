@@ -33,22 +33,17 @@ export const App = () => {
     const [fetchRedirectUrlError, setFetchRedirectUrlError] = useState(false)
 
     useEffect(() => {
-        async function redirectShortUrl() {
+        async function resolveAlias() {
             if (currLocation.length === 7) {
                 try {
                     const alias: string = currLocation.split("/").join("")
 
                     const response = await fetch(
-                        "http://localhost:3000/api/lilify/v1/redirect-url",
-                        {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ alias: alias }),
-                        },
+                        `${import.meta.env[VITE_API_BASE_URL]}/api/lilify/v1/redirect-url?alias=${alias}`,
                     )
                     if (response.ok) {
                         const data = await response.json()
-                        window.location.href = data.redirect_url
+                        window.location.href = data.original_url
                     } else {
                         setInvalidRedirectUrlMsg("Invalid URL")
                     }
@@ -59,7 +54,7 @@ export const App = () => {
             }
         }
 
-        redirectShortUrl()
+        resolveAlias()
     }, [currLocation])
 
     async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
