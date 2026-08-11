@@ -5,7 +5,7 @@ export const shortUrlReqSchema = z4.object({
 })
 export const resolveAliasSchema = z4.object({ alias: z4.string().length(6) })
 
-export type ShortUrlReq = z4.infer<typeof shortUrlReqSchema>
+export type ShortenUrlRequest = z4.infer<typeof shortUrlReqSchema>
 export type ResolveAliasRequest = z4.infer<typeof resolveAliasSchema>
 export type ResolveAliasResponse = {
     original_url: string

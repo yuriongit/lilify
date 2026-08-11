@@ -9,7 +9,7 @@ import type {
 
 export const UrlController = {
     async shortenUrl(req: Request, res: Response, next: NextFunction) {
-        const { original_url }: ShortUrlReq = req.body
+        const { original_url }: ShortenUrlRequest = req.body
 
         const [shortUrl, err] = await UrlService.assignUrl(original_url)
         if (err) {
