@@ -24,19 +24,19 @@
 - [x] ~~Implement cryptographically secure URL alias generation via `node:crypto`~~
 - [x] ~~Add API architecture foundation~~
     - [x] ~~Document application flow, backend design, and technology decisions~~
+- [x] Implement URL redirection endpoint
+    - [x] Resolve short alias and redirect users to the original URL
+- [x] Add CORS configuration
 
 #### Features
 
 - [ ] Handle duplicate original URLs
     - [ ] Return existing short URL alias when original URL already exists
-- [ ] Implement URL redirection endpoint
-    - [ ] Resolve short alias and redirect users to the original URL
-- [ ] Add CORS configuration
 - [ ] Add Redis caching for frequently accessed alias mappings
 
 #### Testing
 
-- [ ] Create API unit tests
+- [x] Create API unit tests
 - [ ] Create integration tests for URL shortening flow
 - [ ] Create integration tests for URL redirection flow
 
@@ -53,17 +53,15 @@
 
 - [x] ~~Create initial SvelteKit frontend~~
 - [x] ~~Add client-side validation with Zod~~
+- [x] ~~Connect frontend to API endpoints~~
+- [x] ~~Add frontend loading/error states~~
+- [x] ~~Scaffold new React frontend~~
+- [x] ~~Port existing functionality~~
+- [x] ~~Remove SvelteKit project files once migration is verified~~
 
-#### Migration: SvelteKit → React
-
-- [ ] Scaffold new React frontend
-- [ ] Port existing functionality
-- [ ] Remove SvelteKit project files once migration is verified
 
 #### Features
 
-- [ ] Connect frontend to API endpoints
-- [ ] Add frontend loading/error states
 - [ ] Improve component structure and organization
 - [ ] Replace generated UI code with manually structured components
 
@@ -90,21 +88,16 @@
 #### Completed
 
 - [x] ~~Add initial CI workflow~~
-- [x] Actions
+- [x] ~~Actions~~
     - [x] ~~Composite Action: Setup Bun~~
     - [x] ~~Composite Action: Install Deps~~
     - [x] ~~Composite Action: TypeScript Check~~
-
-- [ ] CI Workflow
-    - [x] Workflow: Build API
-        - [x] Job: 'build-api'
-            - [x] ~~Step: Build Docker image~~
 
 #### Remaining
 
 - [ ] Complete CI Workflow
     - [x] ~~Job: Run global linting~~
-    - [ ] Remove 'frontend' from 'build-api/needs' field
+    - [x] Remove 'frontend' from 'build-api/needs' field
     - [ ] Workflow: API
         - [ ] Job: 'test-and-verify'
             - [x] ~~Service: MongoDB~~
@@ -113,6 +106,9 @@
             - [x] ~~Step: Install dependencies~~
             - [x] ~~Step: TypeScript checks~~
             - [ ] Step: Run tests
+    - [x] ~~Workflow: Build API~~
+        - [x] ~~Job: 'build-api'~~
+            - [x] ~~Step: Build Docker image~~
     - [ ] Workflow: Frontend
         - [ ] Job: 'test-and-verify'
             - [x] ~~Step: Checkout code~~
@@ -129,8 +125,8 @@
 
 #### Remaining
 
-- [x] Implement lint fixes to satisfy Biome ruleset
-- [ ] Set up Bun test runner
+- [x] ~~Implement lint fixes to satisfy Biome ruleset~~
+- [x] ~~Set up Bun test runner~~
 - [ ] Create test coverage requirements
 - [ ] Add environment variable documentation
 - [ ] Review and clean up overall project file structure
