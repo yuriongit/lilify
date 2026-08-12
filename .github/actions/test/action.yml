@@ -1,4 +1,4 @@
-name: TypeScript Check
+name: Tests Check
 inputs:
     working-directory:
         required: true
@@ -7,8 +7,7 @@ inputs:
 runs:
     using: composite
     steps:
-        - name: TypeScript Check
+        - name: Tests Check
           working-directory: ${{ inputs.working-directory }}
           shell: bash
-          run: bunx tsc --noEmit
- 
+          run: bun test
