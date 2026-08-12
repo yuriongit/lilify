@@ -1,16 +1,18 @@
 services:
+    # Mongo Database
     mongo:
         image: mongo:latest
         container_name: lilify-db
-        restart: always
         ports:
             - "27017:27017"
+        restart: unless-stopped
         environment:
             MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
             MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
         volumes:
             - mongo-data:/data/db
 
+    # Mongo Express UI
     mongo-express:
         image: mongo-express:latest
         container_name: lilify-db-ui
@@ -22,26 +24,37 @@ services:
             ME_CONFIG_MONGODB_PORT: 27017
             ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
             ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-            # Configures the web browser popup login to match your env credentials
+            # Login credentials for the web browser popup
             ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
             ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
         depends_on:
             - mongo
 
+    # API 
     express:
         build:
             context: ./
+        develop:
+            watch:
+            # Sync source files without rebuild
+            - path: ./
+              action: sync
+              target: ./app/
+              ignore:
+              - node_modules/
+            # Sync source files without rebuild
+            - path: package.json
+              target: ./app/package.json
+              action: rebuild
         container_name: lilify-api
-        restart: always
+        restart: unless-stopped
         ports:
-            - "${PORT}:3000"
-        environment:
-            PORT: 3000
-            MONGO_URI: ${MONGO_URI}
-            NODE_ENV: ${NODE_ENV}
-            FRONTEND_BASE_URL: ${FRONTEND_BASE_URL}
+            - "3000:3000"
+        env_file:
+            - .env
         depends_on:
             - mongo
 
+# According Volumes
 volumes:
     mongo-data:
