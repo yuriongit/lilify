@@ -12,3 +12,7 @@ jobs:
             uses: ./.github/actions/setup-bun
           - name: Install Dependencies
             run: bun install --frozen-lockfile
+          - name: Test Check 
+            uses: ./.github/actions/test
+            with:
+                working-directory: ./frontend
