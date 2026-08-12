@@ -29,6 +29,10 @@ jobs:
               uses: ./.github/actions/tsc-check
               with:
                 working-directory: ./api
+            - name: Test Check 
+              uses: ./.github/actions/test
+              with:
+                working-directory: ./api
 
             # - name: Unit-Tests
             #   env:
