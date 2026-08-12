@@ -55,8 +55,16 @@ export const UrlService = {
             return [null, new Error(`assignUrl: ${idErr.message}`)]
         }
 
-        // 2. Persist to MongoDB
         try {
+            const cacheQuery = await redisClient.get(ogUrl)
+            if (cacheQuery !== null) {
+                return [cacheQuery, null]
+            }
+
+            await redisClient.set(ogUrl, ogUrl)
+            redisClient.expire(ogUrl, 900)
+
+            // 2. Persist to MongoDB
             await UrlsModel.create({
                 short_id: id, // Store only the 6-character key in the DB
                 original_url: ogUrl,
