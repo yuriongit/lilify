@@ -1,18 +1,22 @@
 name: Frontend
 on:
     workflow_call:
-      
+
 jobs:
     test-and-verify:
         runs-on: ubuntu-latest
         steps:
-          - name: Checkout Code
-            uses: actions/checkout@v5
-          - name: Setup Bun
-            uses: ./.github/actions/setup-bun
-          - name: Install Dependencies
-            run: bun install --frozen-lockfile
-          - name: Test Check 
-            uses: ./.github/actions/test
-            with:
-                working-directory: ./frontend
+            # Checkout Code
+            - name: Checkout Code
+              uses: actions/checkout@v5
+            # Setup Bun
+            - name: Setup Bun
+              uses: ./.github/actions/setup-bun
+            # Install Dependencies
+            - name: Install Dependencies
+              run: bun install --frozen-lockfile
+            # Test Check
+            - name: Test Check
+              uses: ./.github/actions/test
+              with:
+                  working-directory: ./frontend

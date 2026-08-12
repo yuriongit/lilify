@@ -17,24 +17,24 @@ jobs:
                     - 27017:27017
 
         steps:
+            # Checkout Code
             - name: Checkout Code
               uses: actions/checkout@v5
+            # Setup Bun Environment
             - name: Setup Bun Environment
               uses: ./.github/actions/setup-bun
+            # Install Dependencies
             - name: Install Dependencies
               uses: ./.github/actions/install-deps
               with:
                 working-directory: ./api
+            # TypeScript Check
             - name: TypeScript Check
               uses: ./.github/actions/tsc-check
               with:
                 working-directory: ./api
+            # Test Check 
             - name: Test Check 
               uses: ./.github/actions/test
               with:
                 working-directory: ./api
-
-            # - name: Unit-Tests
-            #   env:
-            #       MONGO_URI: mongodb://localhost:27017/lilify_test
-            #   run: bun test

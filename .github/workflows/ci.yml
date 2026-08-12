@@ -7,17 +7,21 @@ on:
         branches: [main]
 
 jobs:
+    # Lint
     lint:
         uses: ./.github/workflows/ci-lint.yml
+    # API
     api:
         needs:
             [lint]
         uses: ./.github/workflows/ci-api.yml
         secrets:
             MONGO_URI: ${{ secrets.MONGO_URI }}
+    # Build
     build-api:
         needs: [api]
         uses: ./.github/workflows/ci-build-api.yml
+    # Frontend 
     frontend:
         needs:
             [api]
