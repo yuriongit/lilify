@@ -30,7 +30,6 @@
         "noUnusedParameters": true,
         "noUncheckedSideEffectImports": true,
         "noUncheckedIndexedAccess": true,
-        "noPropertyAccessFromIndexSignature": true,
 
         // Temporary flag
         "noErrorTruncation": false // for debugging, if usedonce done revert to false

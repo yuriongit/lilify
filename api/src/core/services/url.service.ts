@@ -4,8 +4,6 @@ import { HttpError } from "@/middleware/errors/errors"
 import { generateId } from "@/utils/id"
 
 // Environment vars indexes
-const FRONTEND_URL = "FRONTEND_URL"
-
 export type Result<T> = [data: T, err: null] | [data: null, err: Error]
 
 export const UrlService = {
@@ -64,7 +62,7 @@ export const UrlService = {
                 created_at: Date.now(),
             })
 
-            const baseUrl = env[FRONTEND_URL] ?? "http://localhost:5173"
+            const baseUrl = env.FRONTEND_URL ?? "http://localhost:5173"
             const fullShortUrl = `${baseUrl}/${id}`
 
             return [fullShortUrl, null]
