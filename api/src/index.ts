@@ -9,9 +9,6 @@ const app = express()
 app.use(corsConfig)
 app.use(express.json())
 
-// Environment vars indexes
-const PORT = "PORT"
-
 app.post(
     "/api/lilify/v1/urls",
     validateBody(shortUrlReqSchema),
@@ -24,7 +21,7 @@ app.get(
     UrlController.getOriginalUrl,
 )
 
-app.listen(Number(process.env[PORT]), () =>
+app.listen(Number(process.env.PORT), () =>
     console.log("Server up and running :)"),
 )
 app.use(errorMiddleware)

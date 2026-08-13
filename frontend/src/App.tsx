@@ -2,11 +2,9 @@ import { IconArrowBackUp, IconMoodPuzzled } from "@tabler/icons-react"
 import { type SubmitEvent, useEffect, useState } from "react"
 import { z } from "zod/v4"
 
-const VITE_API_BASE_URL = "VITE_API_BASE_URL"
-const API_BASE_URL = String(import.meta.env[VITE_API_BASE_URL])
 const BASE_ENDPOINT = "api/lilify/v1/urls"
 
-if (!API_BASE_URL) {
+if (!import.meta.env.VITE_API_BASE_URL) {
     throw new Error("Missing required environment variable: VITE_API_BASE_URL")
 }
 
@@ -36,7 +34,7 @@ export const App = () => {
                     const alias: string = currLocation.split("/").join("")
 
                     const response = await fetch(
-                        `${import.meta.env[VITE_API_BASE_URL]}/${BASE_ENDPOINT}?alias=${alias}`,
+                        `${import.meta.env.VITE_API_BASE_URL}/${BASE_ENDPOINT}?alias=${alias}`,
                     )
                     if (response.ok) {
                         const data = await response.json()
