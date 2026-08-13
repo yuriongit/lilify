@@ -6,7 +6,8 @@
     "devDependencies": {
         "@types/bun": "latest",
         "@types/cors": "^2.8.19",
-        "@types/express": "^5.0.6"
+        "@types/express": "^5.0.6",
+        "@types/redis": "^4.0.11"
     },
     "peerDependencies": {
         "typescript": "7.0.2"
@@ -16,6 +17,7 @@
         "express": "^5.2.1",
         "mongodb": "^7.5.0",
         "mongoose": "^9.9.1",
+        "redis": "^6.2.1",
         "zod": "^4.4.3"
     },
     "scripts": {

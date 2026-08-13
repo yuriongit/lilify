@@ -1,5 +1,6 @@
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { env } from "bun"
+import { redisClient } from "@/libs/clients/storage/redis.client"
 import { HttpError } from "@/middleware/errors/errors"
 import { generateId } from "@/utils/id"
 
@@ -54,8 +55,16 @@ export const UrlService = {
             return [null, new Error(`assignUrl: ${idErr.message}`)]
         }
 
-        // 2. Persist to MongoDB
         try {
+            const cacheQuery = await redisClient.get(ogUrl)
+            if (cacheQuery !== null) {
+                return [cacheQuery, null]
+            }
+
+            await redisClient.set(ogUrl, ogUrl)
+            redisClient.expire(ogUrl, 900)
+
+            // 2. Persist to MongoDB
             await UrlsModel.create({
                 short_id: id, // Store only the 6-character key in the DB
                 original_url: ogUrl,
@@ -79,13 +88,21 @@ export const UrlService = {
      */
     async resolveUrl(alias: string): Promise<Result<string>> {
         try {
-            const urlInfo = await UrlsModel.findOne(
+            const cacheQuery = await redisClient.get(alias)
+            if (cacheQuery !== null) {
+                return [cacheQuery, null]
+            }
+
+            const dbQuery = await UrlsModel.findOne(
                 { short_id: alias },
                 { original_url: 1 },
             )
 
-            if (urlInfo !== null) {
-                return [urlInfo.original_url, null]
+            if (dbQuery !== null) {
+                await redisClient.set(alias, dbQuery.original_url)
+                redisClient.expire(alias, 900)
+
+                return [dbQuery.original_url, null]
             } else {
                 return [
                     null,
