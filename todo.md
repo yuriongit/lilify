@@ -24,19 +24,19 @@
 - [x] ~~Implement cryptographically secure URL alias generation via `node:crypto`~~
 - [x] ~~Add API architecture foundation~~
     - [x] ~~Document application flow, backend design, and technology decisions~~
-- [x] Implement URL redirection endpoint
-    - [x] Resolve short alias and redirect users to the original URL
-- [x] Add CORS configuration
+- [x] ~~Implement URL redirection endpoint~~
+    - [x] ~~Resolve short alias and redirect users to the original URL~~
+- [x] ~~Add CORS configuration~~
 
 #### Features
 
 - [ ] Handle duplicate original URLs
-    - [ ] Return existing short URL alias when original URL already exists
-- [ ] Add Redis caching for frequently accessed alias mappings
+    - [x] ~~Return existing short URL alias when original URL already exists~~
+- [x] ~~Add Redis caching for frequently accessed alias mappings~~
 
 #### Testing
 
-- [x] Create API unit tests
+- [x] ~~Create API unit tests~~
 - [ ] Create integration tests for URL shortening flow
 - [ ] Create integration tests for URL redirection flow
 
@@ -59,7 +59,6 @@
 - [x] ~~Port existing functionality~~
 - [x] ~~Remove SvelteKit project files once migration is verified~~
 
-
 #### Features
 
 - [ ] Improve component structure and organization
@@ -80,8 +79,8 @@
 
 #### Remaining
 
-- [ ] Create production Dockerfile
-- [ ] Update current Dockerfile to Dockerfile.dev for development
+- [x] ~~Update Dockerfile for production~~
+- [x] ~~Update docker-compose for development~~
 
 ## GitHub Actions
 
@@ -95,27 +94,27 @@
 
 #### Remaining
 
-- [ ] Complete CI Workflow
+- [x] ~~Complete CI Workflow~~
     - [x] ~~Job: Run global linting~~
-    - [x] Remove 'frontend' from 'build-api/needs' field
-    - [ ] Workflow: API
-        - [ ] Job: 'test-and-verify'
+    - [x] ~~Remove 'frontend' from 'build-api/needs' field~~
+    - [x] ~~Workflow: API~~
+        - [x] ~~Job: 'test-and-verify'~~
             - [x] ~~Service: MongoDB~~
             - [x] ~~Step: Checkout code~~
             - [x] ~~Step: Setup environment~~
             - [x] ~~Step: Install dependencies~~
             - [x] ~~Step: TypeScript checks~~
-            - [ ] Step: Run tests
+            - [x] ~~Step: Run tests~~
     - [x] ~~Workflow: Build API~~
         - [x] ~~Job: 'build-api'~~
             - [x] ~~Step: Build Docker image~~
-    - [ ] Workflow: Frontend
-        - [ ] Job: 'test-and-verify'
+    - [x] ~~Workflow: Frontend~~
+        - [x] ~~Job: 'test-and-verify'~~
             - [x] ~~Step: Checkout code~~
             - [x] ~~Step: Setup environment~~
             - [x] ~~Step: Install dependencies~~
-            - [ ] Step: TypeScript checks
-            - [ ] Step: Run tests
+            - [x] ~~Step: TypeScript checks~~
+            - [x] ~~Step: Run tests~~
 
 ## Chores
 
