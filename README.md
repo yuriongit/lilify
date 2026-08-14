@@ -1,82 +1,52 @@
-# URL Shortener
+# Lilify
 
-A full-stack URL shortening application that generates unique short links and redirects users to their original URLs.
+A simple URL shortener. Give it a long URL, get back a short one that redirects to it.
+
+Built mainly as a learning project; this is a project to learn and practice Docker, GitHub Actions, and a proper git workflow (PRs, CI checks, squash merges, linear history).
 
 ## Features
-
-- Generate shortened URLs with unique aliases
-- Validate requests on both client and server
-- REST API backend with structured controllers and services
-- Containerized development environment
-- Automated CI checks with GitHub Actions
+- Shorten a URL and redirect from the short link
+- Basic validation on frontend and backend
+- REST API with a simple controller/service structure
+- Dockerfile for building the API image
+- Docker Compose for local development
+- CI checks via GitHub Actions
 
 ## Tech Stack
 
-### Frontend
+**Frontend:** React, Vite, TypeScript, TailwindCSS, Zod
 
-- SvelteKit -> React (planned)
-- Vite
-- TypeScript
-- TailwindCSS
-- Zod
+**Backend:** Bun, Express, MongoDB, Zod, Docker
 
-### Backend
+**Tooling:** Bun, GitHub Actions, Biome, Docker Compose
 
-- Bun
-- Express
-- MongoDB
-- Zod
-- Docker
+## Running locally
 
-### Tooling
-
-- Bun (package manager and development tooling)
-- GitHub Actions
-- Biome
-- Docker Compose
-
-## Development
-
-Clone the repository:
-
+Clone the repo:
 ```bash
 git clone https://github.com/yuriongit/lilify.git
 cd lilify
 ```
 
 Install dependencies:
-
 ```bash
-# API
-cd api
-bun install
-```
-```bash
-# Frontend
-cd frontend
-bun install
+cd api && bun install --frozen-lockfile
+cd ../frontend && bun install --frozen-lockfile
 ```
 
-Start the development environment:
-
+Run it:
 ```bash
 # API
 cd api
 docker compose up --build
-```
-```bash
+
 # Frontend
 cd frontend
 bun run dev
-o # to open server in browser
 ```
 
-## Documentation
-
-For detailed architecture decisions and system flow, see:
-
-- [Architecture](./docs/architecture.md)
+## Docs
+More on architecture and design decisions: [docs/architecture.md](./docs/architecture.md)
 
 ## Status
-
-Currently under active development.
+Work in progress.
