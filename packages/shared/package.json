@@ -1,0 +1,21 @@
+{
+  "name": "@app/shared",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./schemas": "./src/schemas/index.ts",
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
+  },
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "typescript": "^6"
+  }
+}
