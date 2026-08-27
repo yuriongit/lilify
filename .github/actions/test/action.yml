@@ -1,13 +1,13 @@
 name: Tests Check
 inputs:
-    working-directory:
-        required: true
-        type: string
+  working-directory:
+    required: true
+    type: string
 
 runs:
-    using: composite
-    steps:
-        - name: Tests Check
-          working-directory: ${{ inputs.working-directory }}
-          shell: bash
-          run: bun test
+  using: composite
+  steps:
+    - name: Tests Check
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      run: bun test

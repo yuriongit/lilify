@@ -1,0 +1,24 @@
+import { HttpError } from "@middleware/errors/http.error"
+import type { NextFunction, Request, Response } from "express"
+import { ZodError, type ZodObject } from "zod/v4"
+
+export const validateBody =
+  (schema: ZodObject) =>
+  async (req: Request, _res: Response, next: NextFunction) => {
+    try {
+      await schema.parseAsync(req.body)
+
+      next()
+    } catch (err) {
+      if (err instanceof ZodError) {
+        next(
+          new HttpError(
+            400,
+            `request body did not pass validation${err.cause !== "undefined" && `: ${err.cause}`}`,
+          ),
+        )
+      } else {
+        next(new HttpError(400, "request body did not pass validation"))
+      }
+    }
+  }

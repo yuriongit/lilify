@@ -1,13 +1,13 @@
 name: Install Dependencies
-inputs: 
-    working-directory:
-        required: true
-        type: string
+inputs:
+  working-directory:
+    required: true
+    type: string
 
 runs:
-    using: composite
-    steps:
-        - name: Install Dependencies
-          working-directory: ${{ inputs.working-directory }}
-          shell: bash
-          run: bun install --frozen-lockfile
+  using: composite
+  steps:
+    - name: Install Dependencies
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      run: bun install --frozen-lockfile

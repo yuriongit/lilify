@@ -1,10 +1,11 @@
 # Lilify
 
-A simple URL shortener. Give it a long URL, get back a short one that redirects to it.
+A simple URL shortener. Shorten any link... about as simple as that.
 
-Built mainly as a learning project; this is a project to learn and practice Docker, GitHub Actions, and a proper git workflow (PRs, CI checks, squash merges, linear history).
+Built mainly as a learning project. It's a project to learn and practice Docker, GitHub Actions.
 
 ## Features
+
 - Shorten a URL and redirect from the short link
 - Basic validation on frontend and backend
 - REST API with a simple controller/service structure
@@ -14,7 +15,7 @@ Built mainly as a learning project; this is a project to learn and practice Dock
 
 ## Tech Stack
 
-**Frontend:** React, Vite, TypeScript, TailwindCSS, Zod
+**Frontend:** React, TypeScript, TailwindCSS, Zod, Vite, Tanstack Query
 
 **Backend:** Bun, Express, MongoDB, Zod, Docker
 
@@ -23,30 +24,39 @@ Built mainly as a learning project; this is a project to learn and practice Dock
 ## Running locally
 
 Clone the repo:
+
 ```bash
 git clone https://github.com/yuriongit/lilify.git
 cd lilify
 ```
 
-Install dependencies:
+Install (optional to run via Docker):
+
 ```bash
-cd api && bun install --frozen-lockfile
-cd ../frontend && bun install --frozen-lockfile
+bun install --frozen-lockfile
 ```
 
 Run it:
-```bash
-# API
-cd api
-docker compose up --build
 
-# Frontend
-cd frontend
-bun run dev
+```bash
+# Docker
+docker compose watch # Development build with watch mode
+# or
+docker compose up --build # Production-based build
+```
+
+Restarting:
+
+```bash
+docker compose down && docker compose ... # Your choice
+# or
+docker compose down -v && docker compose ... # '-v' to start with clean volumes
 ```
 
 ## Docs
+
 More on architecture and design decisions: [docs/architecture.md](./docs/architecture.md)
 
 ## Status
+
 Work in progress.

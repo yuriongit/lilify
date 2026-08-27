@@ -19,4 +19,4 @@ jobs:
             - name: Test Check
               uses: ./.github/actions/test
               with:
-                  working-directory: ./frontend
+                  working-directory: /packages/frontend

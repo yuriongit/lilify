@@ -20,7 +20,7 @@
 **Shared**
 
 - TypeScript
-    - Type safety across the codebase 
+  - Type safety across the codebase
 
 **Tooling:**
 
@@ -28,39 +28,39 @@
 - GitHub Actions
 - Biome
 - Bun's built-in testing
-    - (similar to Vitest)
+  - (similar to Vitest)
 
 **Frontend:**
 
 - SvelteKit
-    - Simple & lightweight
+  - Simple & lightweight
 - Vite
-    - Frontend development server and build tooling
+  - Frontend development server and build tooling
 - Zod
-    - Basic client pre-validation (dual-layer validation)
+  - Basic client pre-validation (dual-layer validation)
 - TailwindCSS
-    - For clean, easy, and rapid development
+  - For clean, easy, and rapid development
 
 **Backend:**
 
 - Docker
-    - Containerize backend services for consistent local development and deployment
+  - Containerize backend services for consistent local development and deployment
 - Bun
-    - Fast JavaScript runtime and built-in package management, testing, and bundling
+  - Fast JavaScript runtime and built-in package management, testing, and bundling
 - Express
-    - Battle-tested, industry-standard, lightweight
+  - Battle-tested, industry-standard, lightweight
 - MongoDB
-    - Document-oriented database, well suited for storing URL mappings
+  - Document-oriented database, well suited for storing URL mappings
 - Redis (Planned)
-    - Cache frequently accessed alias mappings to reduce database reads and improve response times
+  - Cache frequently accessed alias mappings to reduce database reads and improve response times
 - Zod
-    - Full request validation (dual-layer validation)
+  - Full request validation (dual-layer validation)
 - node:crypto
-    - Cryptographically secure random alias generation
+  - Cryptographically secure random alias generation
 
 **Deployment:**
 
 - Backend
-    - Railway
+  - Railway
 - Frontend
-    - Vercel
+  - Vercel
