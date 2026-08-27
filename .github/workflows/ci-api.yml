@@ -27,14 +27,14 @@ jobs:
             - name: Install Dependencies
               uses: ./.github/actions/install-deps
               with:
-                working-directory: /packages/api
+                working-directory: ./packages/api
             # TypeScript Check
             - name: TypeScript Check
               uses: ./.github/actions/tsc-check
               with:
-                working-directory: /packages/api
+                working-directory: ./packages/api
             # Test Check 
             - name: Test Check 
               uses: ./.github/actions/test
               with:
-                working-directory: /packages/api
+                working-directory: ./packages/api

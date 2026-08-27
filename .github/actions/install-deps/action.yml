@@ -7,6 +7,12 @@ inputs:
 runs:
   using: composite
   steps:
+    # Setup Bun
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+    # Install Dependencies
     - name: Install Dependencies
       working-directory: ${{ inputs.working-directory }}
       shell: bash

@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         uses: ./.github/actions/install-deps
         with:
-          working-directory: /packages/api
+          working-directory: ./packages/api
       # Build Docker Image
       - name: Build Docker Image
-        run: docker build -t lilify-api /packages/api
+        run: docker build -t lilify-api ./packages/api
