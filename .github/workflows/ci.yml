@@ -22,5 +22,5 @@ jobs:
     uses: ./.github/workflows/ci-build-api.yml
   # Frontend
   frontend:
-    needs: [api]
+    needs: [lint]
     uses: ./.github/workflows/ci-frontend.yml
