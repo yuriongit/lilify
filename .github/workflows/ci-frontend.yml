@@ -9,14 +9,16 @@ jobs:
             # Checkout Code
             - name: Checkout Code
               uses: actions/checkout@v5
-            # Setup Bun
-            - name: Setup Bun
+            # Setup Bun Environment
+            - name: Setup Bun Environment
               uses: ./.github/actions/setup-bun
             # Install Dependencies
             - name: Install Dependencies
-              run: bun install --frozen-lockfile
+              uses: ./.github/actions/install-deps
+              with:
+                working-directory: ./packages/frontend
             # Test Check
             - name: Test Check
               uses: ./.github/actions/test
               with:
-                  working-directory: /packages/frontend
+                  working-directory: ./packages/frontend
