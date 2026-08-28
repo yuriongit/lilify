@@ -19,4 +19,4 @@ jobs:
           working-directory: ./packages/api
       # Build Docker Image
       - name: Build Docker Image
-        run: docker build -t lilify-api ./packages/api
+        run: docker build -t lilify-api -f ./packages/api/Dockerfile .
