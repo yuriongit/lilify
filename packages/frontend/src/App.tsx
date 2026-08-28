@@ -1,4 +1,3 @@
-import { Utils } from "@app/shared/utils"
 import { Footer } from "@components/Footer"
 import { Header } from "@components/Header"
 import { Home } from "@components/Home"
@@ -9,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import type { SubmitEvent } from "react"
 import { useState } from "react"
 import z4 from "zod/v4"
+import { isHttpError } from "@/utils"
 
 if (!import.meta.env.VITE_API_URL) {
   throw new Error("Missing required environment variable: VITE_API_URL")
@@ -45,7 +45,7 @@ export const Urls = () => {
   const isAliasCandidate = alias.length === 6
   const notFound =
     alias.length > 6
-    || (Utils.isHttpError(resolveError) && resolveError.status === 404)
+    || (isHttpError(resolveError) && resolveError.status === 404)
   const redirectFailed = Boolean(resolveError) && !notFound
   const showErrorState = notFound || redirectFailed
 
@@ -92,7 +92,7 @@ export const Urls = () => {
   const activeError =
     validationError
     || (createUrl.error
-      ? Utils.isHttpError(createUrl.error)
+      ? isHttpError(createUrl.error)
         ? `${createUrl.error.status}: ${createUrl.error.message}`
         : createUrl.error.message
       : null)

@@ -1,8 +1,8 @@
-import { Utils } from "@app/shared/utils"
 import { UrlsModel } from "@libs/clients/storage/mongodb.client"
 import { redisClient } from "@libs/clients/storage/redis.client"
 import { HttpError } from "@middleware/errors/http.error"
-import { generateAlias } from "@utils/alias"
+import { env } from "bun"
+import { constructShortenedUrl, generateAlias } from "@/utils"
 import { UrlCache } from "./url.cache"
 import { UrlRepo } from "./url.repo"
 
@@ -58,7 +58,10 @@ export const UrlService = {
       // 1. Handle duplication prevention by caching a possible existing alias
       const cacheUrlAlias = await UrlCache.get(originalUrl)
       if (cacheUrlAlias !== null) {
-        const shortenedUrl = Utils.constructShortenedUrl(cacheUrlAlias)
+        const shortenedUrl = constructShortenedUrl(
+          String(env.FRONTEND_URL),
+          cacheUrlAlias,
+        )
 
         return [shortenedUrl, null]
       }
@@ -74,7 +77,10 @@ export const UrlService = {
       if (queryAlias !== null) {
         UrlCache.set(originalUrl, queryAlias, 900)
 
-        const shortenedUrl = Utils.constructShortenedUrl(queryAlias)
+        const shortenedUrl = constructShortenedUrl(
+          String(env.FRONTEND_URL),
+          queryAlias,
+        )
         return [shortenedUrl, null]
       }
 
@@ -102,7 +108,10 @@ export const UrlService = {
         created_at: Date.now(),
       })
 
-      const shortenedUrl = Utils.constructShortenedUrl(alias)
+      const shortenedUrl = constructShortenedUrl(
+        String(env.FRONTEND_URL),
+        alias,
+      )
 
       return [shortenedUrl, null]
     } catch (err) {

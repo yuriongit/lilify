@@ -1,6 +1,6 @@
-import { Utils } from "@app/shared/utils"
 import { STYLES } from "@constants/styles"
 import { IconArrowBackUp, IconMoodPuzzled } from "@tabler/icons-react"
+import { isHttpError } from "@/utils"
 
 type Props = {
   redirectFailed: boolean
@@ -17,7 +17,7 @@ export const InvalidShortenedUrlError = ({
     <div className="flex flex-col items-center gap-2">
       <h1 className="text-5xl font-semibold flex items-center gap-2.5">
         <span className="text-blue-600 dark:text-blue-400">
-          {redirectFailed && Utils.isHttpError(resolveError) // error line
+          {redirectFailed && isHttpError(resolveError) // error line
             ? resolveError.status // error line
             : notFound // error line
               ? 404

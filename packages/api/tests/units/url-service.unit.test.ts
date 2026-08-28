@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { generateAlias } from "@utils/alias"
+import { generateAlias } from "@/utils"
 
 describe("UrlService", () => {
   describe("generateId", () => {
