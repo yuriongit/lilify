@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package.json bun.lock* ./
 COPY packages/shared ./packages/shared
 COPY packages/api ./packages/api
-COPY packages/frontend/package.json ./packages/frontend/package.json
 
 # Production Dependencies
 FROM base AS production-dependencies
