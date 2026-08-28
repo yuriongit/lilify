@@ -66,7 +66,7 @@ export const UrlService = {
         return [shortenedUrl, null]
       }
 
-      // 1. Handle duplication prevention by querying the database if the possible existing alias is not in cache
+      // 1B. Handle duplication prevention by querying the database if the possible existing alias is not in cache
       const [queryAlias, queryAliasErr] = await UrlRepo.queryAlias(originalUrl)
       if (queryAliasErr !== null) {
         return [
@@ -93,13 +93,13 @@ export const UrlService = {
         ]
       }
 
-      // 3. Store alias with original url in cache
-      await redisClient.set(originalUrl, alias, {
-        expiration: {
-          type: "EX",
-          value: 900,
-        },
-      })
+      // // 3. Store alias with original url in cache
+      // await redisClient.set(originalUrl, alias, {
+      //   expiration: {
+      //     type: "EX",
+      //     value: 900,
+      //   },
+      // })
 
       // 2. Persist to MongoDB
       await UrlsModel.create({
@@ -138,8 +138,7 @@ export const UrlService = {
       )
 
       if (dbQuery !== null) {
-        await redisClient.set(alias, dbQuery.original_url)
-        redisClient.expire(alias, 900)
+        await UrlCache.set(alias, dbQuery.original_url, 900)
 
         return [dbQuery.original_url, null]
       } else {
