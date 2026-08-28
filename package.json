@@ -4,13 +4,15 @@
   "type": "module",
   "private": true,
   "version": "1.0.0",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@biomejs/biome": "2.5.10",
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "7.0.2"
+    "typescript": "^6.0.0"
   },
   "scripts": {
     "lint": "bunx --bun @biomejs/biome lint",
