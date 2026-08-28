@@ -5,11 +5,7 @@ export const UrlCache = {
     const data = await redisClient.get(key)
     return data ?? null
   },
-  async set(
-    key: string,
-    value: string,
-    ttlInSeconds: number,
-  ): Promise<void> {
+  async set(key: string, value: string, ttlInSeconds: number): Promise<void> {
     await redisClient.set(key, value, {
       expiration: {
         type: "EX",
