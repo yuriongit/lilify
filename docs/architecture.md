@@ -1,66 +1,74 @@
-## High-Level Flow
+# Architecture
 
-**Part A: Data collection, validation, persistence, and response**
+## Overview
 
-1. The client collects a URL from the user and sends it to the server for shortening.
+A URL shortener built to practice **GitHub Actions CI/CD** and **Docker containerization**. The app validates, shortens, and redirects URLs with dual-layer validation and caching.
 
-2. The server checks whether the original URL has already been persisted. If it exists, the shortened URL is returned.
+---
 
-3. Otherwise, the server generates a unique 6-character alias and persists both the original URL and its alias.
+## Tech Stack
 
-4. The newly generated shortened URL is returned to the client.
+| Layer | Technology |
+|-------|-----------|
+| **Language** | TypeScript (shared) |
+| **Frontend** | React, Vite, TailwindCSS, Zod |
+| **Backend** | Bun, Express, MongoDB, Redis (planned) |
+| **Testing** | Bun's built-in testing |
+| **Linting** | Biome |
+| **Version Control** | Git & GitHub |
+| **Deployment** | Docker, Railway (backend), Vercel (frontend) |
 
-**Part B: URL retrieval and redirection**
+---
 
-1. When a shortened URL is requested, the server looks up the corresponding alias in the database.
-2. If found, the server responds with an HTTP redirect to the original URL.
+## Core Flow
 
-## Architecture
+**Shorten a URL:**
+1. Client validates URL (protocol, length) with Zod
+2. Server validates and checks if alias exists in DB
+3. If not, generate a unique 6-character alias with retry logic (max 5 attempts)
+4. Store mapping in MongoDB with unique index
+5. Return shortened URL
 
-**Shared**
+**Redirect:**
+1. Look up alias in MongoDB
+2. Redirect to original URL via HTTP redirect
 
-- TypeScript
-  - Type safety across the codebase
+---
 
-**Tooling:**
+## GitHub Actions CI Pipeline
 
-- Git & GitHub
-- GitHub Actions
-- Biome
-- Bun's built-in testing
-  - (similar to Vitest)
+Runs on every push to `main` and pull requests.
 
-**Frontend:**
+1. **Lint**: Biome checks on all code
+2. **API Tests**: Bun tests (depends on lint passing, uses `MONGO_URI` secret)
+3. **Build Docker Image**: Multi-stage build for backend (depends on tests passing)
+4. **Frontend Build**: Vite build for React app
 
-- SvelteKit
-  - Simple & lightweight
-- Vite
-  - Frontend development server and build tooling
-- Zod
-  - Basic client pre-validation (dual-layer validation)
-- TailwindCSS
-  - For clean, easy, and rapid development
+CD will add deployments to Railway and Vercel.
 
-**Backend:**
+---
 
-- Docker
-  - Containerize backend services for consistent local development and deployment
-- Bun
-  - Fast JavaScript runtime and built-in package management, testing, and bundling
-- Express
-  - Battle-tested, industry-standard, lightweight
-- MongoDB
-  - Document-oriented database, well suited for storing URL mappings
-- Redis (Planned)
-  - Cache frequently accessed alias mappings to reduce database reads and improve response times
-- Zod
-  - Full request validation (dual-layer validation)
-- node:crypto
-  - Cryptographically secure random alias generation
+## Docker Setup
 
-**Deployment:**
+- **Backend**: Multi-stage Dockerfile, non-root user, environment configuration
+- **Frontend**: Built with Vite, deployed to Vercel
+- **Local Development**: Docker Compose for consistent environment
 
-- Backend
-  - Railway
-- Frontend
-  - Vercel
+---
+
+## Database
+
+**MongoDB**: Stores URL mappings with fields:
+- `alias` (unique index, 6 characters)
+- `originalUrl`
+- `createdAt`
+
+**Redis** (planned): Cache frequently accessed aliases to reduce DB reads.
+
+---
+
+## Key Implementation Details
+
+- **Collision handling**: Retry up to 5 times if alias exists (6-character space is large enough to avoid collisions in practice)
+- **Validation layers**: Client (Zod) + Server (Zod)
+- **Unique constraint**: MongoDB unique index on `alias` field prevents duplicates
