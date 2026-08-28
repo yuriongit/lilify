@@ -10,7 +10,7 @@
     "@types/redis": "^4.0.11"
   },
   "peerDependencies": {
-    "typescript": "7.0.2"
+    "typescript": "^6.0.0"
   },
   "dependencies": {
     "@app/shared": "workspace:*",

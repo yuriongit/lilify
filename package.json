@@ -10,7 +10,7 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "typescript": "7.0.2"
+    "typescript": "^6.0.0"
   },
   "scripts": {
     "lint": "bunx --bun @biomejs/biome lint",
@@ -25,8 +25,8 @@
     "dev:api": "bun --filter @app/api run dev",
     "dev:frontend": "bun --filter @app/frontend run dev",
     "build": "bun --filter='./packages/*' run build",
-    "build:api": "bun --filter @app/api run build",
-    "build:frontend": "bun --filter @app/frontend run build",
+    "build:api": "bun --filter='./packages/api' run build",
+    "build:frontend": "bun --filter='./packages/frontend' run build",
     "clean": "rm -rf node_modules packages/*/node_modules",
     "clean:lock": "rm -rf node_modules packages/*/node_modules bun.lock"
   }
