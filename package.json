@@ -4,9 +4,7 @@
   "type": "module",
   "private": true,
   "version": "1.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "devDependencies": {
     "@biomejs/biome": "2.5.10",
     "@types/bun": "latest"
