@@ -16,6 +16,7 @@
     "@app/shared": "workspace:*",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
     "mongodb": "^7.5.0",
     "mongoose": "^9.9.1",
     "redis": "^6.2.1",
