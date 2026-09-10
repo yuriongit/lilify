@@ -1,25 +1,27 @@
 # Lilify
 
-A simple URL shortener. Shorten any link... about as simple as that.
+A simple URL shortener.
 
-Built mainly as a learning project. It's a project to learn and practice Docker, GitHub Actions.
+Built mainly as a learning project. It's a project to learn and practice
+Docker, and GitHub Actions.
 
 ## Features
 
 - Shorten a URL and redirect from the short link
-- Basic validation on frontend and backend
-- REST API with a simple controller/service structure
+- Basic client-side validation and full-validation on backend
+- Express.js REST API with a simple controller/service/repo structure
 - Dockerfile for building the API image
-- Docker Compose for local development
-- CI checks via GitHub Actions
+- Containerized application with Docker Compose for local
+development with watch mode
+- CI/CD pipeline via GitHub Actions
 
 ## Tech Stack
 
-**Frontend:** React, TypeScript, TailwindCSS, Zod, Vite, Tanstack Query
+**Frontend:** React, TypeScript, TailwindCSS, TanStack Query, Vite
 
-**Backend:** Bun, Express, MongoDB, Zod, Docker
+**Backend:** TypeScript, Express, MongoDB, Redis, Bun
 
-**Tooling:** Bun, GitHub Actions, Biome, Docker Compose
+**CI/CD & Infrastructure:** GitHub Actions, Docker, Railway
 
 ## Running locally
 
@@ -28,12 +30,6 @@ Clone the repo:
 ```bash
 git clone https://github.com/yuriongit/lilify.git
 cd lilify
-```
-
-Install (optional to run via Docker):
-
-```bash
-bun install --frozen-lockfile
 ```
 
 Run it:
@@ -48,15 +44,17 @@ docker compose up --build # Production-based build
 Restarting:
 
 ```bash
-docker compose down && docker compose ... # Your choice
+docker compose down
 # or
-docker compose down -v && docker compose ... # '-v' to start with clean volumes
+docker compose down -v # '-v' to start with clean volumes
+# Then use your command of choice, development or production-based build
+docker compose ...
 ```
 
 ## Docs
 
-More on architecture and design decisions: [docs/architecture.md](./docs/architecture.md)
+More on architecture: [docs/architecture.md](./docs/architecture.md)
 
 ## Status
 
-Work in progress.
+Complete.
