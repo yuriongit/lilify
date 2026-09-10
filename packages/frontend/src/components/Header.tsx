@@ -4,7 +4,7 @@ export const Header = () => (
       Lilify
     </span>
     <a
-      href="https://github.com/yuriongit"
+      href="https://github.com/yuriongit/lilify"
       target="_blank"
       rel="noopener noreferrer"
       className="text-sm underline decoration-dashed underline-offset-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-block"
