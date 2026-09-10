@@ -93,14 +93,6 @@ export const UrlService = {
         ]
       }
 
-      // // 3. Store alias with original url in cache
-      // await redisClient.set(originalUrl, alias, {
-      //   expiration: {
-      //     type: "EX",
-      //     value: 900,
-      //   },
-      // })
-
       // 2. Persist to MongoDB
       await UrlsModel.create({
         alias: alias,
