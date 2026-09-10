@@ -1,134 +1,70 @@
 # To-Do
 
-## Shared
+## Remaining Tasks
 
-#### Completed
+- [ ] Add API integration tests for URL shortening flow
 
-- [x] ~~Implement and configure Biome for formatting and linting~~
-  - [x] ~~Include corresponding Biome scripts~~
-- [x] ~~Add a tsconfig-base and refactor sub tsconfig files to follow the base~~
-  - [x] ~~Update bracket indexing to satisfy stricter tsconfig-base~~
-
-#### Remaining
-
-- [x] Establish shared TypeScript types
-- [x] Establish shared schemas
-
-## API
-
-#### Completed
-
-- [x] ~~Create initial REST API structure~~
-  - [x] ~~Controller and service layer separation~~
-  - [x] ~~Request validation middleware~~
-  - [x] ~~Centralize error handling middleware~~
-- [x] ~~Implement cryptographically secure URL alias generation via `node:crypto`~~
-- [x] ~~Add API architecture foundation~~
-  - [x] ~~Document application flow, backend design, and technology decisions~~
-- [x] ~~Implement URL redirection endpoint~~
-  - [x] ~~Resolve short alias and redirect users to the original URL~~
-- [x] ~~Add CORS configuration~~
-- [x] ~~Add caching to GET & POST routes
-
-#### Features
-
-- [x] Handle duplicate original URLs
-  - [x] ~~Return existing short URL alias when original URL already exists~~
-- [x] ~~Add Redis caching for frequently accessed alias mappings~~
-
-#### Testing
-
-- [x] ~~Create API unit tests~~
-- [ ] Create integration tests for URL shortening flow
-- [ ] Create integration tests for URL redirection flow
-
-#### Cleanup
-
-- [x] Reorganize directory structure
-- [x] Review controller/service separation
-  - [ ] Additionally, separate data from service layer into repo layer
-- [x] Review error handling consistency and improve if needed
-
-## Frontend
-
-#### Completed
-
-- [x] ~~Create initial SvelteKit frontend~~
-- [x] ~~Add client-side validation with Zod~~
-- [x] ~~Connect frontend to API endpoints~~
-- [x] ~~Add frontend loading/error states~~
-- [x] ~~Scaffold new React frontend~~
-- [x] ~~Port existing functionality~~
-- [x] ~~Remove SvelteKit project files once migration is verified~~
-
-#### Features
-
-- [ ] Improve component structure and organization
-- [ ] Replace generated UI code with manually structured components
-
-#### Testing
+- [ ] Add API integration tests for URL redirection flow
 
 - [ ] Set up frontend testing environment
-- [ ] Create component tests
 
-## Docker
+- [ ] Write component tests
 
-#### Completed
+- [ ] Project maintenance
 
-- [x] ~~Add Docker configuration~~
-  - [x] ~~Containerize backend services~~
-  - [x] ~~Configure Docker Compose for local development~~
+- [ ] Audit and clean up overall project file structure
 
-#### Remaining
+## Completed Milestones
 
-- [x] ~~Update Dockerfile for production~~
-- [x] ~~Update docker-compose for development~~
+### 1. Shared
 
-## GitHub Actions
+- [x] ~~Set up Biome formatting/linting and npm scripts~~
 
-#### Completed
+- [x] ~~Centralize TypeScript settings with tsconfig-base and fix strict indexing~~
 
-- [x] ~~Add initial CI workflow~~
-- [x] ~~Actions~~
-  - [x] ~~Composite Action: Setup Bun~~
-  - [x] ~~Composite Action: Install Deps~~
-  - [x] ~~Composite Action: TypeScript Check~~
+- [x] ~~Establish shared TypeScript types and schemas~~
 
-#### Remaining
+### 2. API
 
-- [x] ~~Complete CI Workflow~~
-  - [x] ~~Job: Run global linting~~
-  - [x] ~~Remove 'frontend' from 'build-api/needs' field~~
-  - [x] ~~Workflow: API~~
-    - [x] ~~Job: 'test-and-verify'~~
-      - [x] ~~Service: MongoDB~~
-      - [x] ~~Step: Checkout code~~
-      - [x] ~~Step: Setup environment~~
-      - [x] ~~Step: Install dependencies~~
-      - [x] ~~Step: TypeScript checks~~
-      - [x] ~~Step: Run tests~~
-  - [x] ~~Workflow: Build API~~
-    - [x] ~~Job: 'build-api'~~
-      - [x] ~~Step: Build Docker image~~
-  - [x] ~~Workflow: Frontend~~
-    - [x] ~~Job: 'test-and-verify'~~
-      - [x] ~~Step: Checkout code~~
-      - [x] ~~Step: Setup environment~~
-      - [x] ~~Step: Install dependencies~~
-      - [x] ~~Step: TypeScript checks~~
-      - [x] ~~Step: Run tests~~
+- [x] ~~Architecture & Layers: Controller, service, and repository layer separation~~
 
-## Chores
+- [x] ~~Middleware & Security: Centralized error handling, request validation,
+and CORS~~
 
-#### Completed
+- [x] ~~Features: Cryptographically secure alias generation (node:crypto), redirection
+endpoint, and duplicate URL handling~~
 
-...
+- [x] ~~Performance: Dual-layer caching (GET/POST routes and Redis for alias mappings)~~
 
-#### Remaining
+- [x] ~~Testing & Docs: Initial unit test suite and system architecture documentation~~
 
-- [x] ~~Implement lint fixes to satisfy Biome ruleset~~
-- [x] ~~Set up Bun test runner~~
-- [ ] Create test coverage requirements
-- [ ] Add environment variable documentation
-- [ ] Review and clean up overall project file structure
-- [ ] Add production deployment configuration
+### 3. Frontend Application
+
+- [x] ~~Improve frontend components structure and organization~~
+
+- [x] ~~Refactor UI code into structured components~~
+
+- [x] ~~Migration: Ported application from SvelteKit to React and purged legacy
+ files~~
+
+- [x] ~~Integration: Connected API endpoints, added loading/error states, and client
+ validation via Zod~~
+
+### 4. DevOps & CI/CD
+
+- [x] ~~Docker: Containerized services and configured Compose for development and
+ production~~
+
+- [x] ~~GitHub Actions: Built reusable composite actions (Bun setup, dependencies
+, TypeScript checks)~~
+
+- [x] ~~CI/CD Pipelines: Automated linting, API tests (with MongoDB service),
+ Frontend checks, Docker image builds, and continuous deployment~~
+
+### 5. Project Chores
+
+- [x] ~~Resolved lint warnings using Biome~~
+
+- [x] ~~Configured Bun test runner~~
+
+- [x] ~~Added .env.example template~~
