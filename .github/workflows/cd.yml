@@ -17,6 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Setup Bun Environment
+        uses: ./.github/actions/setup-bun
+        
       - name: Install Railway CLI
         run: bun i -g @railway/cli
 
