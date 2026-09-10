@@ -2,7 +2,7 @@ import { redisClient } from "@libs/clients/storage/redis.client"
 
 export const UrlCache = {
   async get(key: string): Promise<string | null> {
-    return await redisClient.get(key) ?? null
+    return (await redisClient.get(key)) ?? null
   },
   async set(key: string, value: string, ttlInSeconds: number): Promise<void> {
     await redisClient.set(key, value, {
