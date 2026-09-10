@@ -24,6 +24,6 @@ jobs:
         run: bun i -g @railway/cli
 
       - name: Deploy to Railway
-        run: railway up --ci
+        run: railway up --ci --service lilify-api
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
