@@ -1,29 +1,32 @@
 # Lilify
 
-A simple URL shortener.
-
-Built mainly as a learning project. It's a project to learn and practice
-Docker, and GitHub Actions.
+A simple URL shortener. A project focused on learning and utilizing
+Docker alongside GitHub Actions.
 
 ## Features
 
 - Shorten a URL and redirect from the short link
 - Basic client-side validation and full-validation on backend
 - Express.js REST API with a simple controller/service/repo structure
-- Dockerfile for building the API image
-- Containerized application with Docker Compose for local
-development with watch mode
+- Containerized application with Docker for development and deployment
 - CI/CD pipeline via GitHub Actions
 
-## Tech Stack
+## Technologies
 
-**Frontend:** React, TypeScript, TailwindCSS, TanStack Query, Vite
-
-**Backend:** TypeScript, Express, MongoDB, Redis, Bun
-
-**CI/CD & Infrastructure:** GitHub Actions, Docker, Railway
+| Layer | Tool |
+| ----- | ---- |
+| API | TypeScript, Express, MongoDB, Redis, Bun |
+| Frontend | TypeScript, React, Vite |
+| Infrastructure | Docker, Railway |
+| CI/CD | GitHub Actions |
 
 ## Running locally
+
+**Requirements**:
+
+Docker
+
+---
 
 Clone the repo:
 
