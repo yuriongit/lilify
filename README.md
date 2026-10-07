@@ -56,6 +56,15 @@ docker compose down
 docker compose down -v # '-v' to wipe volumes clean
 ```
 
+---
+
+Usage:
+
+- Frontend: <http://localhost:5173>
+- API: <http://localhost:3000>
+- MongoDB UI: <http://localhost:8081/db/lilify/urls>
+- Redis UI: <http://localhost:8001/redis-stack/browser>
+
 ## Docs
 
 More on architecture: [docs/architecture.md](./docs/architecture.md)
