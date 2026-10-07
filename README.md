@@ -1,7 +1,11 @@
 # Lilify
 
-A simple URL shortener. A project focused on learning and utilizing
-Docker alongside GitHub Actions.
+Built a RESTful URL shortener using TypeScript, React, and Node.js, containerized
+with Docker and deployed in a cloud environment on Railway with automated CI/CD
+via GitHub.
+
+_This is a project focused on learning and utilizing
+Docker alongside GitHub Actions._
 
 ## Features
 
