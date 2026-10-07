@@ -1,81 +1,59 @@
 # Architecture
 
-## Overview
+## Infrastructure
 
-A URL shortener built to practice **GitHub Actions CI/CD** and
-**Docker containerization**. The app validates, shortens, and redirects URLs
-with dual-layer validation and caching.
+| Layer          | Technology               |
+| -------------- | ------------------------ |
+| API            | TypeScript, Express, Bun |
+| Frontend       | TypeScript, React, Vite  |
+| Database       | MongoDB                  |
+| Cache          | Redis                    |
+| Testing        | Bun                      |
+| Linting        | Biome                    |
+| Infrastructure | Docker, Railway, Vercel  |
+| CI/CD          | GitHub Actions           |
 
----
+## Request Flow
 
-## Tech Stack
+### Shortening a URL
 
-| Layer               | Technology                                     |
-| ------------------- | ---------------------------------------------- |
-| **Language**        | TypeScript (end-to-end)                        |
-| **Frontend**        | React, Vite, TanStack Query, Tailwind CSS, Zod |
-| **Backend**         | Bun, Express, MongoDB, Redis                   |
-| **Testing**         | Bun's built-in testing                         |
-| **Linting**         | Biome                                          |
-| **Version Control** | Git & GitHub                                   |
-| **Deployment**      | Docker, Railway (API), Vercel (frontend)       |
+1. Client validates the URL with Zod.
+2. API validates the request and checks MongoDB for an existing URL.
+3. If needed, the API generates a unique 6-character alias.
+4. The mapping is stored in MongoDB.
+5. The shortened URL is returned.
 
----
+### Redirecting
 
-## Core Flow
+1. API looks up the alias in Redis.
+2. If not cached, it queries MongoDB.
+3. The original URL is returned through an HTTP redirect.
+4. Frequently accessed URLs are cached in Redis.
 
-**Shorten a URL:**
+## CI/CD
 
-1. Client validates URL (protocol, length) with Zod
-2. Server validates and checks if alias exists in DB using original URL
-3. If there's no existing alias under that original URL, the API generates a unique
-6-character alias with retry logic (max 5 attempts)
-4. Store mapping in MongoDB with alias as a unique index
-5. Return shortened URL
+GitHub Actions runs on pushes to `main` and pull requests.
 
-**Redirect:**
+- Lint with Biome
+- Run API tests
+- Build the Docker image
+- Build the frontend
 
-1. Look up alias in MongoDB
-2. Redirect to original URL via HTTP redirect
+Successful builds are deployed to Railway and Vercel.
 
----
+## Docker
 
-## GitHub Actions CI/CD Pipeline
+The backend uses a multi-stage Docker build with a non-root user.
 
-Runs on every push to `main` and pull requests.
-
-1. **Lint**: Biome lints entire codebase
-2. **API Tests**: Bun tests
-3. **Build Docker Image**: Multi-stage build for backend (depends on tests passing)
-4. **Frontend Build**: Vite build for React app
-
-CD deploys to Railway and Vercel.
-
----
-
-## Docker Setup
-
-- **Backend**: Multi-stage Dockerfile, non-root user, environment configuration
-- **Frontend**: Built with Vite, deployed to Vercel
-- **Local Development**: Docker Compose with watch mode for consistent environment
-
----
+Docker Compose provides the local development environment and watch mode.
 
 ## Database
 
-**MongoDB**: Stores URL mappings:
+MongoDB stores URL mappings:
 
-- `alias` (unique index, 6 characters)
-- `original_url`
-- `created_at`
+- `alias` — unique 6-character identifier
+- `original_url` — destination URL
+- `created_at` — creation timestamp
 
-**Redis**: Cache frequently accessed aliases to reduce database load.
-
----
-
-## Key Implementation Details
-
-- **Collision handling**: Retry up to 5 times if alias exists (6-character space
-is large enough to avoid collisions in practice)
-- **Validation layers**: Client (Zod) + Server (Zod)
-- **Unique constraint**: MongoDB unique index on `alias` field prevents duplicates
+MongoDB enforces alias uniqueness with a unique index. Alias generation retries
+up to 5 times if a collision occurs.
