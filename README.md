@@ -11,7 +11,7 @@ Docker alongside GitHub Actions._
 
 - Shorten a URL and redirect from the short link
 - Basic client-side validation and full-validation on backend
-- Express.js REST API with a simple controller/service/repo structure
+- Express REST API with a simple controller/service/repo structure
 - Containerized application with Docker for development and deployment
 - CI/CD pipeline via GitHub Actions
 
