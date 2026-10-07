@@ -17,12 +17,16 @@ Docker alongside GitHub Actions._
 
 ## Technologies
 
-| Layer | Tool |
-| ----- | ---- |
-| API | TypeScript, Express, MongoDB, Redis, Bun |
-| Frontend | TypeScript, React, Vite |
-| Infrastructure | Docker, Railway |
-| CI/CD | GitHub Actions |
+| Layer          | Tool                                     |
+| -------------- | ---------------------------------------- |
+| API            | TypeScript, Express, MongoDB, Redis, Bun |
+| Frontend       | TypeScript, React, Vite                  |
+| Infrastructure | Docker, Railway                          |
+| CI/CD          | GitHub Actions                           |
+
+## Requirements
+
+- Docker
 
 ## Running locally
 
