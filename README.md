@@ -1,58 +1,69 @@
 # Lilify
 
-A simple URL shortener. A project focused on learning and utilizing
-Docker alongside GitHub Actions.
+Built a RESTful URL shortener using TypeScript, React, and Node.js, containerized
+with Docker and deployed in a cloud environment on Railway with automated CI/CD
+via GitHub.
+
+_This is a project focused on learning and utilizing
+Docker alongside GitHub Actions._
 
 ## Features
 
 - Shorten a URL and redirect from the short link
 - Basic client-side validation and full-validation on backend
-- Express.js REST API with a simple controller/service/repo structure
+- Express REST API with a simple controller/service/repo structure
 - Containerized application with Docker for development and deployment
 - CI/CD pipeline via GitHub Actions
 
-## Technologies
+## Infrastructure
 
-| Layer | Tool |
-| ----- | ---- |
-| API | TypeScript, Express, MongoDB, Redis, Bun |
-| Frontend | TypeScript, React, Vite |
-| Infrastructure | Docker, Railway |
-| CI/CD | GitHub Actions |
+| Layer          | Tool                                     |
+| -------------- | ---------------------------------------- |
+| API            | TypeScript, Express, MongoDB, Redis, Bun |
+| Frontend       | TypeScript, React, Vite                  |
+| Infrastructure | Docker, Railway                          |
+| CI/CD          | GitHub Actions                           |
 
-## Running locally
+## Requirements
 
-**Requirements**:
+- Docker
 
-Docker
+## Quick Start
 
----
-
-Clone the repo:
+Clone the repository:
 
 ```bash
 git clone https://github.com/yuriongit/lilify.git
 cd lilify
 ```
 
-Run it:
+Start the container:
+
+- Firstly, rename .env.example to .env
 
 ```bash
 # Docker
-docker compose watch # Development build with watch mode
+docker compose watch # Development build
 # or
-docker compose up --build # Production-based build
+docker compose up --build # Production build
 ```
 
-Restarting:
+Stop the container:
 
 ```bash
 docker compose down
 # or
-docker compose down -v # '-v' to start with clean volumes
-# Then use your command of choice, development or production-based build
-docker compose ...
+docker compose down -v # '-v' to wipe volumes clean
 ```
+
+---
+
+Usage:
+
+- Frontend: <http://localhost:5173>
+- API: <http://localhost:3000>
+- MongoDB UI: <http://localhost:8081/db/lilify/urls>
+- Redis UI: <http://localhost:8001/redis-stack/browser>
 
 ## Docs
 
