@@ -15,7 +15,7 @@ Docker alongside GitHub Actions._
 - Containerized application with Docker for development and deployment
 - CI/CD pipeline via GitHub Actions
 
-## Technologies
+## Infrastructure
 
 | Layer          | Tool                                     |
 | -------------- | ---------------------------------------- |
