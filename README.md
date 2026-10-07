@@ -28,38 +28,32 @@ Docker alongside GitHub Actions._
 
 - Docker
 
-## Running locally
+## Quick Start
 
-**Requirements**:
-
-Docker
-
----
-
-Clone the repo:
+Clone the repository:
 
 ```bash
 git clone https://github.com/yuriongit/lilify.git
 cd lilify
 ```
 
-Run it:
+Start the container:
+
+- Firstly, rename .env.example to .env
 
 ```bash
 # Docker
-docker compose watch # Development build with watch mode
+docker compose watch # Development build
 # or
-docker compose up --build # Production-based build
+docker compose up --build # Production build
 ```
 
-Restarting:
+Stop the container:
 
 ```bash
 docker compose down
 # or
-docker compose down -v # '-v' to start with clean volumes
-# Then use your command of choice, development or production-based build
-docker compose ...
+docker compose down -v # '-v' to wipe volumes clean
 ```
 
 ## Docs
