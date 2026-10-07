@@ -1,6 +1,6 @@
 # Lilify
 
-Built a RESTful URL shortener using TypeScript, React, and Node.js, containerized
+Built a RESTful URL shortener using TypeScript, React, and Bun, containerized
 with Docker and deployed in a cloud environment on Railway with automated CI/CD
 via GitHub.
 
